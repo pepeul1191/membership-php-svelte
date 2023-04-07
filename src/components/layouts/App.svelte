@@ -1,7 +1,6 @@
 <script>
 	import 'bootstrap/dist/css/bootstrap.min.css';
-	
-
+	// variables
 	export let name;
 </script>
 

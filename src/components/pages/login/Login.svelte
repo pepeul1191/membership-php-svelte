@@ -1,4 +1,5 @@
 <script>
+  import { navigate } from 'svelte-routing';
 </script>
 
 <svelte:head>
@@ -18,12 +19,16 @@
       <input type="password" class="form-control" id="txtPassord" placeholder="Password">
       <label for="txtPassord">Contraseña</label>
     </div>
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
+    <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Ingresar</button>
+    <button class="w-100 btn mt-1 btn-lg btn-success" type="submit">Ingresar con Google</button>
+    <div class="row mt-3 links">
+      <div class="col-md-5">
+        <a href="/login/sign-in" on:click|preventDefault={() => {navigate('/login/sign-in')}} class="text-left">Crear Cuenta</a>
+      </div>
+      <div class="col-md-7">
+        <a href="/login/reset-password" on:click|preventDefault={() => {navigate('/login/reset-password')}} class="text-right">Recuperar Contraseña</a>
+      </div>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
     <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
   </form>
 </main>

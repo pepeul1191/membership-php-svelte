@@ -1,0 +1,9 @@
+FF_ENVIRONMENT = development || production
+FF_CSRF = true || false
+FF_SESSION = true || false
+FF_API= true || false
+DB="mysql://root:Sila-1234@127.0.0.1:3306/antergo"
+FACEBOOK="https://facebook.com/antergo"
+INSTAGRAM="https://instagram.com/antergo"
+WHASTAPP="+51 901 268 633"
+EMAIL_SITE="proyectos@antergo.pe"
