@@ -5,3 +5,4 @@
 *lock.json
 vendor
 .env
+public/fonts/*
