@@ -1,0 +1,18 @@
+html, body {
+  font-size:0.95rem !important;
+}
+
+.btn, .form-control{
+  border-radius: 0px;
+}
+
+.fw-normal {
+	font-weight: 400!important;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+  --bs-btn-padding-y: 0.5rem;
+  --bs-btn-padding-x: 1rem;
+  --bs-btn-font-size: 1.0rem;
+  --bs-btn-border-radius: 0.5rem;
+}

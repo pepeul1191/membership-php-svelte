@@ -30,7 +30,7 @@ function serve() {
 }
 
 const App = {
-	input: 'src/entries/main.js',
+	input: 'src/entries/app.js',
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -43,7 +43,37 @@ const App = {
 				dev: !production
 			}
 		}),
-		css({ output: production ? 'app.css' : 'app.min.css' }),
+		css({ output: 'app.css' }),
+		resolve({
+			browser: true,
+			dedupe: ['svelte'],
+			exportConditions: ['svelte']
+		}),
+		commonjs(),
+		//!production && serve(),
+		!production && livereload('public'),
+		production && terser()
+	],
+	watch: {
+		clearScreen: false
+	}
+};
+
+const Login = {
+	input: 'src/entries/login.js',
+	output: {
+		sourcemap: true,
+		format: 'iife',
+		name: 'login',
+		file: production ? 'public/build/login.min.js' : 'public/build/login.js'
+	},
+	plugins: [
+		svelte({
+			compilerOptions: {
+				dev: !production
+			}
+		}),
+		css({ output: 'login.css' }),
 		resolve({
 			browser: true,
 			dedupe: ['svelte'],
@@ -59,7 +89,7 @@ const App = {
 	}
 };
 
-export default [App, ];
+export default [App, Login];
 
 /*
 const App = {
