@@ -26,13 +26,11 @@ function javascriptsIndex($staticURL)
   switch ($_ENV['FF_ENVIRONMENT']) {
     case 'development':
       $javascripts = [
-        $staticURL . 'vendor/bootstrap/bootstrap.bundle.min',
         $staticURL . 'build/login',
       ];
       break;
     case 'production':
       $javascripts = [
-        $staticURL . 'vendor/bootstrap/bootstrap.bundle.min',
         $staticURL . 'build/login.min',
       ];
       break;

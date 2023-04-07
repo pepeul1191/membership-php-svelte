@@ -12,15 +12,16 @@
     <h1 class="h3 mb-3 fw-normal">Bienvenido</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="txtUser" placeholder="demo">
+      <input type="text" class="form-control" id="txtUser" placeholder="demo" required>
       <label for="txtUser">Usuario</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="txtPassord" placeholder="Password">
+      <input type="password" class="form-control" id="txtPassord" placeholder="Password" required>
       <label for="txtPassord">Contraseña</label>
     </div>
     <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Ingresar</button>
-    <button class="w-100 btn mt-1 btn-lg btn-success" type="submit">Ingresar con Google</button>
+    <button class="w-100 btn mt-1 btn-lg btn-success" type="submit"><i class="fa fa-google" aria-hidden="true"></i>
+Ingresar con Google</button>
     <div class="row mt-3 links">
       <div class="col-md-5">
         <a href="/login/sign-in" on:click|preventDefault={() => {navigate('/login/sign-in')}} class="text-left">Crear Cuenta</a>
@@ -29,7 +30,7 @@
         <a href="/login/reset-password" on:click|preventDefault={() => {navigate('/login/reset-password')}} class="text-right">Recuperar Contraseña</a>
       </div>
     </div>
-    <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
+    <p class="mt-5 mb-3 text-body-secondary">Powered By <a href="http://softweb.pe/"> Softtware Web Perú</a>© 2011–2023</p>
   </form>
 </main>
 

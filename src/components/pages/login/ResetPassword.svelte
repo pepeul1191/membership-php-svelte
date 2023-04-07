@@ -24,7 +24,7 @@
         <a href="/login/sign-in" on:click|preventDefault={() => {navigate('/login/sign-in')}} class="text-left">Crear Cuenta</a>
       </div>
     </div>
-    <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
+    <p class="mt-5 mb-3 text-body-secondary">Powered By <a href="http://softweb.pe/"> Softtware Web Perú</a>© 2011–2023</p>
   </form>
 </main>
 

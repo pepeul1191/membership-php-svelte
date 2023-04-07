@@ -2,7 +2,7 @@ html, body {
   font-size:0.95rem !important;
 }
 
-.btn, .form-control{
+.btn, .form-control, .modal-content{ 
   border-radius: 0px;
 }
 
@@ -15,4 +15,12 @@ html, body {
   --bs-btn-padding-x: 1rem;
   --bs-btn-font-size: 1.0rem;
   --bs-btn-border-radius: 0.5rem;
+}
+
+.cb-label:hover{
+  cursor: pointer;
+}
+
+.btn i {
+  margin-right: 5px;
 }

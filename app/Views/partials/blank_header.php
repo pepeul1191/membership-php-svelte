@@ -18,7 +18,7 @@
   <script type="text/javascript">
     const BASE_URL = "<?php echo $baseURL;?>";
     const STATIC_URL = "<?php echo $staticURL;?>";
-    const ENTERPRISE_DATA = JSON.parse('<?php echo htmlspecialchars_decode($enterpriseData,ENT_QUOTES); ?>');
+    const ENTERPRISE_DATA = JSON.parse('<?php echo htmlspecialchars_decode(enterpriseData(),ENT_QUOTES); ?>');
   </script>
 </head>
 <body>

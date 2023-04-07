@@ -5,6 +5,7 @@ import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
+import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -43,6 +44,18 @@ const App = {
 				dev: !production
 			}
 		}),
+		copy({
+			targets: [
+				{ 
+					src: 'node_modules/font-awesome/fonts/*', 
+					dest: 'public/fonts'
+				},
+				{ 
+					src: 'node_modules/bootstrap-icons/font/fonts/*', 
+					dest: 'public/build/fonts'
+				}
+			]
+		}),
 		css({ output: 'app.css' }),
 		resolve({
 			browser: true,
@@ -73,7 +86,7 @@ const Login = {
 				dev: !production
 			}
 		}),
-		css({ output: 'login.css' }),
+		css({ output: production ? 'login.min.css' : 'login.css' }),
 		resolve({
 			browser: true,
 			dedupe: ['svelte'],

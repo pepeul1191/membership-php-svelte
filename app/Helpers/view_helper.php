@@ -19,3 +19,15 @@ function loadJavascripts($array_js)
   }
   return $resp;
 }
+
+function enterpriseData()
+{
+  return json_encode(array(
+    'facebook' => $_ENV['FACEBOOK'],
+    'instagram' => $_ENV['INSTAGRAM'],
+    'whastapp' => $_ENV['WHASTAPP'],
+    'email' => $_ENV['EMAIL_SITE'],
+    'phone' => $_ENV['PHONE'],
+    'enterprise_name' => $_ENV['ENTERPRISE_NAME'],
+  ));
+}
