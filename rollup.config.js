@@ -29,7 +29,40 @@ function serve() {
 	};
 }
 
-export default {
+const App = {
+	input: 'src/entries/main.js',
+	output: {
+		sourcemap: true,
+		format: 'iife',
+		name: 'app',
+		file: production ? 'public/build/app.min.js' : 'public/build/app.js'
+	},
+	plugins: [
+		svelte({
+			compilerOptions: {
+				dev: !production
+			}
+		}),
+		css({ output: production ? 'app.css' : 'app.min.css' }),
+		resolve({
+			browser: true,
+			dedupe: ['svelte'],
+			exportConditions: ['svelte']
+		}),
+		commonjs(),
+		!production && serve(),
+		!production && livereload('public'),
+		production && terser()
+	],
+	watch: {
+		clearScreen: false
+	}
+};
+
+export default [App, ];
+
+/*
+const App = {
 	input: 'src/entries/main.js',
 	output: {
 		sourcemap: true,
@@ -76,3 +109,4 @@ export default {
 		clearScreen: false
 	}
 };
+*/
