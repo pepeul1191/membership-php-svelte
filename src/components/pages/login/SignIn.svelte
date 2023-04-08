@@ -1,12 +1,19 @@
 <script>
   import { navigate } from 'svelte-routing';
   import { Modal } from 'bootstrap';
+  import { onMount } from 'svelte';
+  import queryString from 'query-string';
+  export let location;
   // variables
+  let message = '';
+  let messageColor = '';
+  let queryParams;
   const enterpiseData = ENTERPRISE_DATA;
   let modal;
   let disabled = true;
   let termsChecked = false;
   // functions
+  $: queryParams = queryString.parse(location.search);
   const termsAndContiditions = () => {
     const myModal = document.getElementById('termsAndConditionsModal');
     modal = new Modal(myModal);
@@ -15,6 +22,55 @@
   const closeModal = () => {
     modal.hide();
   };
+  onMount(() => {
+		// console.log('index');  
+    // console.log(CSRF);
+    // console.log(queryParams);
+    if(queryParams.error == 'csrf-mismatch'){
+      message = 'Error de autenticación CSRF';
+      messageColor = 'text-danger';
+      disabled = false;
+      termsChecked = true;
+    }else if(queryParams.error == 'fill-all'){
+      message = 'Debe de llenar todos los campos';
+      messageColor = 'text-danger';
+      disabled = false;
+      termsChecked = true;
+    }else if(queryParams.error == 'email-invalid'){
+      message = 'Debe ingresar un correo válido';
+      messageColor = 'text-danger';
+      disabled = false;
+      termsChecked = true;
+    }else if(queryParams.error == 'passwords-mismatch'){
+      message = 'Contraseñas no coinciden';
+      messageColor = 'text-danger';
+      disabled = false;
+      termsChecked = true;
+    }else if(queryParams.error == 'not-a-member-email'){
+      message = 'Correo no pertence a una membresía';
+      messageColor = 'text-danger';
+      disabled = false;
+      termsChecked = true;
+    }else if(queryParams.error == 'email-with-member'){
+      message = 'Correo ya pertenece a una cuenta de usuario';
+      messageColor = 'text-danger';
+      disabled = false;
+      termsChecked = true;
+    }else if(queryParams.success == 'activate-account'){
+      message = 'Correo de confirmación enviado';
+      messageColor = 'text-success';
+      disabled = false;
+      termsChecked = true;
+    }else if(queryParams.error == 'user-named-used'){
+      message = 'Nombre de usuario ya en uso';
+      messageColor = 'text-danger';
+      disabled = false;
+      termsChecked = true;
+    }else{
+      message = '';
+      messageColor = '';
+    }
+	});
 </script>
 
 <svelte:head>
@@ -22,23 +78,23 @@
 </svelte:head>
 
 <main class="form-signin w-100 m-auto text-center">
-  <form>
+  <form action="/sign_in" method="post">
     <img class="mb-4" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Nueva Cuenta</h1>
     <div class="form-floating">
-      <input type="text" class="form-control" id="txtUser" placeholder="Usuario" disabled={disabled} required>
+      <input type="text" name="user" class="form-control" id="txtUser" placeholder="Usuario" disabled={disabled} required>
       <label for="txtUser">Usuario</label>
     </div>
     <div class="form-floating">
-      <input type="text" class="form-control" id="txtEmail" placeholder="Correo Electrónico" disabled={disabled} required>
+      <input type="text" name="email" class="form-control" id="txtEmail" placeholder="Correo Electrónico" disabled={disabled} required>
       <label for="txtEmail">Correo Electrónico</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="txtPassord" placeholder="Contraseña" disabled={disabled} required>
+      <input type="password" name="password" class="form-control" id="txtPassord" placeholder="Contraseña" disabled={disabled} required>
       <label for="txtPassord">Contraseña</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="txtPassord2" placeholder="Repita Contraseña" disabled={disabled} required>
+      <input type="password" name="password2" class="form-control" id="txtPassord2" placeholder="Repita Contraseña" disabled={disabled} required>
       <label for="txtPassord2">Repetir Contraseña</label>
     </div>
     <div class="checkbox mt-2">
@@ -46,13 +102,14 @@
         <input type="checkbox" bind:checked={termsChecked} data-target="#my-dropdown" on:click|preventDefault="{termsAndContiditions}"> Terminos y Condiciones
       </label>
     </div>
+    <p class="message {messageColor}" style="margin-top:10px;" id="message">{message}</p>
     <button class="w-100 btn btn-lg btn-primary mt-2" type="submit" disabled={disabled}>Crear</button>
     <div class="row mt-3 links">
       <div class="col-md-6">
         <a href="/login" on:click|preventDefault={() => {navigate('/login')}} class="text-right">Ingresar al Sistema</a>
       </div>
       <div class="col-md-6">
-        <a href="/login/reset-password" on:click|preventDefault={() => {navigate('/login/reset-password')}} class="text-right">Recuperar Contraseña</a>
+        <a href="/login/reset_password" on:click|preventDefault={() => {navigate('/login/reset_password')}} class="text-right">Recuperar Contraseña</a>
       </div>
     </div>
     <p class="mt-5 mb-3 text-body-secondary">Powered By <a href="http://softweb.pe/"> Softtware Web Perú</a>© 2011–2023</p>

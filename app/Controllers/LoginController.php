@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Filters\CsrfFormFilter;
 use App\Filters\SessionFalseFilter;
+use App\Libraries\RandomLib;
 
 class LoginController extends BaseController
 {
@@ -81,6 +82,79 @@ class LoginController extends BaseController
         $f3->reroute('/');
       }else{ 
         $f3->reroute($f3->get('PATH') . '?error=user-pass-mismatch');
+      }
+    }
+  }
+
+  function signIn($f3, $args)
+  {
+    // helper
+    parent::loadHelper('crypto');
+    parent::loadHelper('orm');
+    parent::loadHelper('login');
+    // request
+    $payload = $f3->get('POST');
+    $user = $payload['user'];
+    $password = $payload['password'];
+    $password2 = $payload['password2'];
+    $email = $payload['email'];
+    if( // check all field al filled
+      $user == '' || $password == '' || $password2 == '' || $email == ''
+    ){
+      http_response_code(500);
+      $f3->reroute($f3->get('PATH') . 'login/sign_in?error=fill-all');
+    }else{
+      if(validateEmail($email) == false){ // valid email
+        http_response_code(500);
+        $f3->reroute('/login/sign_in?error=email-invalid');
+      }else{
+        if($password != $password2){ // equlas password
+          http_response_code(500);
+          $f3->reroute('/login/sign_in?error=passwords-mismatch');
+        }else{
+          // validate if user name not exist in users
+          $existUser = \Model::factory('App\\Models\\User', 'app')
+            ->where('user', $user)->find_one();
+          if($existUser != false){
+            http_response_code(500);
+            $f3->reroute('/login/sign_in?error=user-named-used');
+          }else{
+            // validate email member    
+            $member = \Model::factory('App\\Models\\Member', 'app')
+              ->where('email', $email)->find_one();
+            if($member == false){
+              http_response_code(500);
+              $f3->reroute('/login/sign_in?error=not-a-member-email');  
+            }else{
+              // validate if member id is asociated with a user
+              $memberId = $member->{'id'};
+              $userMember = \Model::factory('App\\Models\\UserMember', 'app')
+                ->where('member_id', $memberId)->find_one();
+              if($userMember != false){
+                http_response_code(500);
+                $f3->reroute('/login/sign_in?error=email-with-member');  
+              }else{
+                // create new user with the member and then members_users
+                $nUser = \Model::factory('App\\Models\\User', 'app')->create();
+                $nUser->user = $user;
+                $nUser->password = \Cripto::encrypt($password);
+                $nUser->reset_key = '';
+                $nUser->activation_key = \App\Libraries\RandomLib::stringNumber(20);
+                $nUser->save();
+                $nUserMember = \Model::factory('App\\Models\\UserMember', 'app')->create();
+                $nUserMember->member_id = $memberId;
+                $nUserMember->user_id = $nUser->{'id'};
+                $nUserMember->save();
+                // send activation email
+                parent::loadHelper('mail');
+                activationMail($f3, $member, $nUser->activation_key);
+                // ok message
+                http_response_code(200);
+                $f3->reroute('/login?success=activate-account');  
+              }
+            }
+          }
+        }
       }
     }
   }

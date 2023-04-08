@@ -39,3 +39,15 @@ function javascriptsIndex($staticURL)
   }
   return $javascripts;
 }
+
+function validateEmail($email) {
+  // Define a regular expression pattern for valid email addresses
+  $pattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+
+  // Use the preg_match function to test if the email matches the pattern
+  if (preg_match($pattern, $email)) {
+    return true; // The email is valid
+  } else {
+    return false; // The email is invalid
+  }
+}

@@ -1,5 +1,29 @@
 <script>
   import { navigate } from 'svelte-routing';
+  import queryString from 'query-string';
+  import { onMount } from 'svelte';
+  export let location;
+  // variables
+  let message = '';
+  let messageColor = '';
+  let queryParams;
+  // functions
+  $: queryParams = queryString.parse(location.search);
+  onMount(() => {
+		// console.log('index');  
+    // console.log(CSRF);
+    // console.log(queryParams);
+    if(queryParams.error == 'csrf-mismatch'){
+      message = 'Error de autenticación CSRF';
+      messageColor = 'text-danger';
+    }else if(queryParams.success == 'activate-account'){
+      message = 'Correo de confirmación enviado';
+      messageColor = 'text-success';
+    }else{
+      message = '';
+      messageColor = '';
+    }
+	});
 </script>
 
 <svelte:head>
@@ -19,15 +43,16 @@
       <input type="password" class="form-control" id="txtPassord" placeholder="Password" required>
       <label for="txtPassord">Contraseña</label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Ingresar</button>
+    <p class="message {messageColor}" style="margin-top:10px;" id="message">{message}</p>
+    <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Ingresar</button>
     <button class="w-100 btn mt-1 btn-lg btn-success" type="submit"><i class="fa fa-google" aria-hidden="true"></i>
 Ingresar con Google</button>
     <div class="row mt-3 links">
       <div class="col-md-5">
-        <a href="/login/sign-in" on:click|preventDefault={() => {navigate('/login/sign-in')}} class="text-left">Crear Cuenta</a>
+        <a href="/login/sign_in" on:click|preventDefault={() => {navigate('/login/sign_in')}} class="text-left">Crear Cuenta</a>
       </div>
       <div class="col-md-7">
-        <a href="/login/reset-password" on:click|preventDefault={() => {navigate('/login/reset-password')}} class="text-right">Recuperar Contraseña</a>
+        <a href="/login/reset_password" on:click|preventDefault={() => {navigate('/login/reset_password')}} class="text-right">Recuperar Contraseña</a>
       </div>
     </div>
     <p class="mt-5 mb-3 text-body-secondary">Powered By <a href="http://softweb.pe/"> Softtware Web Perú</a>© 2011–2023</p>

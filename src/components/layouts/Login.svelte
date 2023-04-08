@@ -14,8 +14,8 @@
 
 <Router url="{url}" basepath="{basepath}">
   <Route path="/" component="{Login}" />
-  <Route path="/sign-in" component="{SignIn}" />
-  <Route path="/reset-password" component="{ResetPassword}" />
+  <Route path="/sign_in" component="{SignIn}" />
+  <Route path="/reset_password" component="{ResetPassword}" />
   <!--
     <Route path="/*" component="{Redirect404}" />
   -->

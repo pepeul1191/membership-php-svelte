@@ -21,7 +21,7 @@
         <a href="/login" on:click|preventDefault={() => {navigate('/login')}} class="text-right">Ingresar al Sistema</a>
       </div>
       <div class="col-md-6">
-        <a href="/login/sign-in" on:click|preventDefault={() => {navigate('/login/sign-in')}} class="text-left">Crear Cuenta</a>
+        <a href="/login/sign_in" on:click|preventDefault={() => {navigate('/login/sign_in')}} class="text-left">Crear Cuenta</a>
       </div>
     </div>
     <p class="mt-5 mb-3 text-body-secondary">Powered By <a href="http://softweb.pe/"> Softtware Web Perú</a>© 2011–2023</p>
