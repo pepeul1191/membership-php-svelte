@@ -2,8 +2,8 @@
 	import axios from 'axios';
 	import { onMount } from 'svelte';
 	import { navigate } from 'svelte-routing';
-	import { getUser } from '../services/UserService';
-	import { CSRF } from '../stores/csrf.js';
+	import { getUser } from '../../services/UserService';
+	import { CSRF } from '../../stores/csrf.js';
   import { createPopper } from '@popperjs/core';
   import 'bootstrap/dist/js/bootstrap.bundle.min.js';
   // variables
