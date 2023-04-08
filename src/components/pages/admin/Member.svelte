@@ -45,25 +45,25 @@
         colspanFooter={8},
 				rows={{
 					id: {
-						style: 'text-align:center;',
+						style: 'text-align:center; display:none;',
 						type: 'id',
 					},
-					state_name:{
+					code:{
 						type: 'td',
 					},
-          priority_name:{
+          last_names:{
 						type: 'td',
 					},
-          branch_name:{
+          names:{
 						type: 'td',
 					},
-          created:{
+          email:{
 						type: 'td',
 					},
-          edited:{
+          phone:{
 						type: 'td',
 					},
-          worker_name:{
+          medic_obs:{
 						type: 'td',
 					},
           resume:{
@@ -91,7 +91,7 @@
 						caption: 'Código',
 					},
 					{
-						caption: 'Apellidos',
+						caption: 'Apellidos ',
 					},
           {
 						caption: 'Nombres',

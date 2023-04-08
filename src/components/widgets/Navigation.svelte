@@ -95,7 +95,7 @@
       }
     })
     .then(function () {
-      display = true;
+      showUser = true;
     });
 		getUserInfo();
     dropdowns();

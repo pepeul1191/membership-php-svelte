@@ -8,6 +8,7 @@
 	import '../../stylesheets/admin.css';
   import { Router, Route } from 'svelte-routing';
   import Member from '../pages/admin/Member.svelte';
+  import Discipline from '../pages/admin/Discipline.svelte';
   // variables
   export let url = '';
   export let basepath = '/admin';
@@ -19,6 +20,8 @@
 
 <Router url="{url}" basepath="{basepath}">
   <Route path="/" component="{Member}" />
+  <Route path="/member" component="{Member}" />
+  <Route path="/discipline" component="{Discipline}" />
   <!--
     <Route path="/*" component="{Redirect404}" />
   -->

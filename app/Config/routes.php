@@ -20,6 +20,11 @@ $f3->route('GET  /access/user/menu', '\App\Controllers\Access\UserController->me
 $f3->route('GET  /access/user/info', '\App\Controllers\Access\UserController->info');
 #### admin
 $f3->route('GET  /admin', '\App\Controllers\AdminController->index');
+$f3->route('GET  /admin/member', '\App\Controllers\AdminController->index');
+$f3->route('GET  /admin/discipline', '\App\Controllers\AdminController->index');
+### admin - discipline
+$f3->route('GET  /admin/discipline/list', '\App\Controllers\Admin\DisciplineController->list');
+$f3->route('POST /admin/discipline/save', '\App\Controllers\Admin\DisciplineController->save');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

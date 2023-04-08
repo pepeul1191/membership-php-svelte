@@ -148,9 +148,10 @@ class UserController extends BaseController
     */
     if($role == 'admin'){
       $resp = array(
-        array('name' => 'Home', 'url' => '/', 'items' => array()),
-        array('name' => 'Recursos', 'url' => '#', 'items' => array(
-          array('name' => 'Trabajadores', 'url' => '/worker', 'items' => array()), 
+        array('name' => 'Home', 'url' => '/admin', 'items' => array()),
+        array('name' => 'Miembros', 'url' => '/admin/member', 'items' => array()),
+        array('name' => 'Datos Maestros', 'url' => '#', 'items' => array(
+          array('name' => 'Disciplinas', 'url' => '/admin/discipline', 'items' => array()), 
           array('name' => 'Puestos de Trabajo', 'url' => '/position', 'items' => array()), 
           array('name' => 'Tipos de Servicios', 'url' => '/service_type', 'items' => array()), 
           array('name' => 'Sedes - Lima', 'url' => '/branch/lima', 'items' => array()), 
