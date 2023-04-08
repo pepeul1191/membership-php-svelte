@@ -98,8 +98,9 @@ CREATE TABLE `users` (
   `password` varchar(60) NOT NULL,
   `reset_key` varchar(20) DEFAULT NULL,
   `activation_key` varchar(25) DEFAULT NULL,
+  `state` varchar(12) NOT NULL DEFAULT 'PENDING',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +118,7 @@ CREATE TABLE `users_members` (
   KEY `member_id` (`member_id`),
   CONSTRAINT `users_members_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `users_members_ibfk_2` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,5 +149,6 @@ INSERT INTO `schema_migrations` (version) VALUES
   ('20230408000659'),
   ('20230408002015'),
   ('20230408002334'),
-  ('20230408002339');
+  ('20230408002339'),
+  ('20230408020803');
 UNLOCK TABLES;

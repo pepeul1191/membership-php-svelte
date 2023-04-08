@@ -19,6 +19,14 @@
     }else if(queryParams.success == 'activate-account'){
       message = 'Correo de confirmación enviado';
       messageColor = 'text-success';
+    }else if(queryParams.success == 'reset-key'){
+      message = 'Correo para restablecer contraseña enviado';
+      messageColor = 'text-success';
+    }else if(queryParams.error == 'not-a-member-email'){
+      message = 'Correo no pertence a una membresía';
+      messageColor = 'text-danger';
+      disabled = false;
+      termsChecked = true;
     }else{
       message = '';
       messageColor = '';
@@ -43,7 +51,7 @@
       <input type="password" class="form-control" id="txtPassord" placeholder="Password" required>
       <label for="txtPassord">Contraseña</label>
     </div>
-    <p class="message {messageColor}" style="margin-top:10px;" id="message">{message}</p>
+    <p class="message {messageColor}" style="margin-top:10px; margin-bottom: 0px;" id="message">{message}</p>
     <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Ingresar</button>
     <button class="w-100 btn mt-1 btn-lg btn-success" type="submit"><i class="fa fa-google" aria-hidden="true"></i>
 Ingresar con Google</button>

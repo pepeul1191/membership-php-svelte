@@ -159,6 +159,45 @@ class LoginController extends BaseController
     }
   }
 
+  function resetPassword($f3, $args)
+  {
+    // helper
+    parent::loadHelper('crypto');
+    parent::loadHelper('orm');
+    parent::loadHelper('login');
+    // request
+    $payload = $f3->get('POST');
+    $email = $payload['email'];
+    // find user id asking member's email
+    $member = \Model::factory('App\\Models\\Member', 'app')
+      ->where('email', $email)->find_one();
+    if($member == false){
+      http_response_code(500);
+      $f3->reroute('/login/reset_password?error=not-a-member-email');
+    }else{
+      // find user and change
+      $memberId = $member->{'id'};
+      $userMember = \Model::factory('App\\Models\\UserMember', 'app')
+        ->where('member_id', $memberId)->find_one();
+      if($userMember == false){
+        http_response_code(500);
+        $f3->reroute('/login/reset_password?error=not-a-user-member');  
+      }else{
+        // update reset key
+        $user = \Model::factory('App\\Models\\User', 'app')
+          ->where('id', $userMember->{'user_id'})->find_one();
+        $user->reset_key = \App\Libraries\RandomLib::stringNumber(20);
+        $user->save();
+        // send reset email
+        parent::loadHelper('mail');
+        resetMail($f3, $member, $user->reset_key);
+        // ok message
+        http_response_code(200);
+        $f3->reroute('/login?success=reset-key');  
+      }
+    }
+  }
+
   function session($f3)
   {
     var_dump($_SESSION);

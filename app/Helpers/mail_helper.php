@@ -225,3 +225,7 @@ function activationMail($f3, $member, $activationKey)
   return $resp;
   */
 }
+
+function resetMail($f3, $member, $reset_key){
+  
+}
