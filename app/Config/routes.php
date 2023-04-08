@@ -25,6 +25,9 @@ $f3->route('GET  /admin/discipline', '\App\Controllers\AdminController->index');
 ### admin - discipline
 $f3->route('GET  /admin/discipline/list', '\App\Controllers\Admin\DisciplineController->list');
 $f3->route('POST /admin/discipline/save', '\App\Controllers\Admin\DisciplineController->save');
+### admin - member
+$f3->route('GET  /admin/member/list', '\App\Controllers\Admin\MemberController->list');
+$f3->route('POST /admin/member/save', '\App\Controllers\Admin\MemberController->save');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

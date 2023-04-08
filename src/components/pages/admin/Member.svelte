@@ -38,10 +38,10 @@
       <DataTable bind:this={memberDataTable} 
 				urlServices={{ 
 					list: `${baseURL}admin/member/list`, 
-					save: `${baseURL}admin/member/delete` 
+					save: `${baseURL}admin/member/save` 
 				}}
 				buttonSave={true}
-				buttonAddRecord={'/admin/member/add'}
+				buttonAddRow={true}
         colspanFooter={8},
 				rows={{
 					id: {
@@ -49,25 +49,25 @@
 						type: 'id',
 					},
 					code:{
-						type: 'td',
+						type: 'input[text]',
 					},
           last_names:{
-						type: 'td',
+						type: 'input[text]',
 					},
           names:{
-						type: 'td',
+						type: 'input[text]',
 					},
           email:{
-						type: 'td',
+						type: 'input[text]',
 					},
           phone:{
-						type: 'td',
+						type: 'input[text]',
 					},
-          medic_obs:{
-						type: 'td',
+          medical_obs:{
+						type: 'input[text]',
 					},
-          resume:{
-						type: 'td',
+          discipline_id:{
+						type: 'input[text]',
 					},
 					actions:{
 						type: 'actions',
@@ -121,7 +121,7 @@
           save200: 'Se han actualizado los registros de la tabla de miembros',
         }}
         pagination={{
-          step: 10,
+          step: 20,
         }}
 			/>
     </div>
