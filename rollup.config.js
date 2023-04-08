@@ -102,6 +102,36 @@ const Login = {
 	}
 };
 
+const Admin = {
+	input: 'src/entries/admin.js',
+	output: {
+		sourcemap: true,
+		format: 'iife',
+		name: 'admin',
+		file: production ? 'public/build/admin.min.js' : 'public/build/admin.js'
+	},
+	plugins: [
+		svelte({
+			compilerOptions: {
+				dev: !production
+			}
+		}),
+		css({ output: production ? 'admin.min.css' : 'admin.css' }),
+		resolve({
+			browser: true,
+			dedupe: ['svelte'],
+			exportConditions: ['svelte']
+		}),
+		commonjs(),
+		!production && serve(),
+		!production && livereload('public'),
+		production && terser()
+	],
+	watch: {
+		clearScreen: false
+	}
+};
+
 const Error = {
 	input: 'src/entries/error.js',
 	output: {
@@ -132,7 +162,7 @@ const Error = {
 	}
 };
 
-export default [App, Login, Error];
+export default [App, Login, Error, Admin];
 
 /*
 const App = {

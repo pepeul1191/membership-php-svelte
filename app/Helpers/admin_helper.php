@@ -6,12 +6,12 @@ function stylesheetsAdmin($staticURL)
   switch ($_ENV['FF_ENVIRONMENT']) {
     case 'development': // development
       $stylesheets = [
-        $staticURL . 'build/bundle.admin',
+        $staticURL . 'build/admin',
       ];
       break;
     case 'production': // production
       $stylesheets = [
-        $staticURL . 'build/bundle.admin',
+        $staticURL . 'build/admin',
       ];
       break;
     default:
@@ -26,14 +26,12 @@ function javascriptsAdmin($staticURL)
   switch ($_ENV['FF_ENVIRONMENT']) {
     case 'development': // development
       $javascripts = [
-        $staticURL . 'vendor/bootstrap/bootstrap.bundle.min',
-        $staticURL . 'build/bundle.admin',
+        $staticURL . 'build/admin',
       ];
       break;
     case 'production': // production
       $javascripts = [
-        $staticURL . 'vendor/bootstrap/bootstrap.bundle.min',
-        $staticURL . 'build/bundle.admin.min',
+        $staticURL . 'build/admin.min',
       ];
       break;
     default:

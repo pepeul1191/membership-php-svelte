@@ -37,7 +37,7 @@ class AdminController extends BaseController
     parent::loadHelper('admin');
     $f3->mset(array(
       'title' => 'Administrador de Contenido',
-      'href' => '/',
+      'href' => '/admin',
       'stylesheets' => stylesheetsAdmin($f3->get('staticURL')),
       'javascripts' => javascriptsAdmin($f3->get('staticURL')),
     ));

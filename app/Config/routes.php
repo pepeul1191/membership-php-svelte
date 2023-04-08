@@ -13,6 +13,11 @@ $f3->route('POST /change_password', '\App\Controllers\LoginController->changePas
 $f3->route('POST /login', '\App\Controllers\LoginController->access');
 $f3->route('POST /sign_in', '\App\Controllers\LoginController->signIn');
 $f3->route('POST /reset_password', '\App\Controllers\LoginController->resetPassword');
+### access - user
+$f3->route('GET  /access/user/worker/get', '\App\Controllers\Access\UserController->workerGet');
+$f3->route('POST  /access/user/worker/update', '\App\Controllers\Access\UserController->workerUpdate');
+$f3->route('GET  /access/user/menu', '\App\Controllers\Access\UserController->menu');
+$f3->route('GET  /access/user/info', '\App\Controllers\Access\UserController->info');
 #### admin
 $f3->route('GET  /admin', '\App\Controllers\AdminController->index');
 #### rest - file
