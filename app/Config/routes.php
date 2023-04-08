@@ -13,6 +13,8 @@ $f3->route('POST /change_password', '\App\Controllers\LoginController->changePas
 $f3->route('POST /login', '\App\Controllers\LoginController->access');
 $f3->route('POST /sign_in', '\App\Controllers\LoginController->signIn');
 $f3->route('POST /reset_password', '\App\Controllers\LoginController->resetPassword');
+#### admin
+$f3->route('GET  /admin', '\App\Controllers\AdminController->index');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

@@ -27,9 +27,12 @@
       messageColor = 'text-danger';
       disabled = false;
       termsChecked = true;
-    }else if(queryParams.success = 'change-password'){
+    }else if(queryParams.success == 'change-password'){
       message = 'Contraseña actualizada';
       messageColor = 'text-success';
+    }else if(queryParams.error == 'user-pass-mismatch'){
+      message = 'Usuario y/o contraseñas incorrectas';
+      messageColor = 'text-danger';
     }else{
       message = '';
       messageColor = '';
@@ -42,16 +45,16 @@
 </svelte:head>
 
 <main class="form-signin w-100 m-auto text-center">
-  <form>
+  <form action="/login" method="post">
     <img class="mb-4" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Bienvenido</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="txtUser" placeholder="demo" required>
+      <input type="text" class="form-control" id="txtUser" placeholder="demo" name="user" required>
       <label for="txtUser">Usuario</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="txtPassord" placeholder="Password" required>
+      <input type="password" class="form-control" name="password" id="txtPassord" placeholder="Password" required>
       <label for="txtPassord">Contraseña</label>
     </div>
     <p class="message {messageColor}" style="margin-top:10px; margin-bottom: 0px;" id="message">{message}</p>

@@ -61,7 +61,7 @@ class LoginController extends BaseController
       $_SESSION['name'] = 'Antergo Design';
       $_SESSION['img'] = $f3->get('staticURL') . 'assets/img/default-user.png';
       $_SESSION['time'] = date('Y-m-d H:i:s');
-      $f3->reroute('/');
+      $f3->reroute('/admin');
     }else{
       $password = \Cripto::encrypt($password);
       $tmpUser = \Model::factory('App\\Models\\User', 'app')->where(array('user' => $user,'password' => $password))->find_one();

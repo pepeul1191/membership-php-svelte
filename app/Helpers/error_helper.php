@@ -6,12 +6,12 @@ function stylesheetsAccess($staticURL)
   switch ($_ENV['FF_ENVIRONMENT']) {
     case 'development':
       $stylesheets = [
-        $staticURL . 'build/bundle.error',
+        $staticURL . 'build/error',
       ];
       break;
     case 'production':
       $stylesheets = [
-        $staticURL . 'build/bundle.error',
+        $staticURL . 'build/erro.min',
       ];
       break;
     default:

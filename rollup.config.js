@@ -102,7 +102,37 @@ const Login = {
 	}
 };
 
-export default [App, Login];
+const Error = {
+	input: 'src/entries/error.js',
+	output: {
+		sourcemap: true,
+		format: 'iife',
+		name: 'error',
+		file: production ? 'public/build/error.min.js' : 'public/build/error.js'
+	},
+	plugins: [
+		svelte({
+			compilerOptions: {
+				dev: !production
+			}
+		}),
+		css({ output: production ? 'error.min.css' : 'error.css' }),
+		resolve({
+			browser: true,
+			dedupe: ['svelte'],
+			exportConditions: ['svelte']
+		}),
+		commonjs(),
+		// !production && serve(),
+		!production && livereload('public'),
+		production && terser()
+	],
+	watch: {
+		clearScreen: false
+	}
+};
+
+export default [App, Login, Error];
 
 /*
 const App = {

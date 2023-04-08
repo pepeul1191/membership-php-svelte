@@ -24,7 +24,7 @@
       message = 'No coincide las crendenciales para cambiar la contraseña';
       disabled = true;
       messageColor = 'text-danger';
-    }if(queryParams.error == 'passwords-mismatch'){
+    }else if(queryParams.error == 'passwords-mismatch'){
       message = 'Contraseñas no coinciden';
       messageColor = 'text-danger';
       disabled = false;
