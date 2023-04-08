@@ -27,6 +27,9 @@
       messageColor = 'text-danger';
       disabled = false;
       termsChecked = true;
+    }else if(queryParams.success = 'change-password'){
+      message = 'Contraseña actualizada';
+      messageColor = 'text-success';
     }else{
       message = '';
       messageColor = '';

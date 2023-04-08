@@ -191,9 +191,62 @@ class LoginController extends BaseController
         // send reset email
         parent::loadHelper('mail');
         resetMail($f3, $member, $user->reset_key);
+        //echo $f3->{'baseURL'} . 'login/change_password/' . $user->id . '/' . $user->reset_key;exit();
         // ok message
         http_response_code(200);
         $f3->reroute('/login?success=reset-key');  
+      }
+    }
+  }
+
+  function checkResetKey($f3, $args)
+  {
+    // helper
+    parent::loadHelper('crypto');
+    parent::loadHelper('orm');
+    parent::loadHelper('login');
+    // request
+    $payload = json_decode(file_get_contents('php://input'), true);
+    $userId = $payload['user_id'];
+    $resetKey = $payload['reset_key'];
+    // check
+    $user = \Model::factory('App\\Models\\User', 'app')
+      ->where(array('id' => $userId,'reset_key' => $resetKey))->find_one();
+    if($user == false){
+      http_response_code(500);
+      echo 'fail';
+    }else{
+      http_response_code(200);
+      echo 'success';
+    }
+  }
+
+  function changePassword($f3, $args){
+    // request
+    $payload = $f3->get('POST');
+    $userId = $payload['user_id'];
+    $resetKey = $payload['reset_key'];
+    $password = $payload['password'];
+    $password2 = $payload['password2'];
+    // check if  passwords are equlas
+    if($password != $password2){
+      http_response_code(500);
+      //echo '/login/change_password/'. $userId . '/'. $resetKey .'?error=passwords-mismatch';exit();
+      $f3->reroute('/login/change_password/'. $userId . '/'. $resetKey .'?error=passwords-mismatch');
+    }else{
+      // check user_id witch reset_key
+      parent::loadHelper('orm');
+      $user = \Model::factory('App\\Models\\User', 'app')
+        ->where(array('id' => $userId,'reset_key' => $resetKey))->find_one();
+      if($user == false){
+        http_response_code(500);
+        $f3->reroute('/login/change_password/'. $userId . '/'. $resetKey . '?error=user-id-reset-key-mismatch');
+      }else{
+        $user->password = \Cripto::encrypt($password);
+        $user->reset_key = \App\Libraries\RandomLib::stringNumber(20);
+        $user->save();
+        http_response_code(200);
+        $f3->reroute('/login?success=change-password');  
       }
     }
   }
