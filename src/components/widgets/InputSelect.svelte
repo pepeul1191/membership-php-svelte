@@ -1,9 +1,9 @@
 <svelte:options accessors={true} />
 <script>
   import { onMount } from 'svelte';
-  import random from '../Helpers/random.js';
+  import random from '../../helpers/random.js';
   import axios from 'axios';
-  import { CSRF } from '../Stores/csrf.js';
+  import { CSRF } from '../../stores/csrf.js';
   export let data = [];
   export let validationMessage = '';
   export let placeholder = '';

@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import DataTable from '../../widgets/DataTable.svelte';
+  import InputText from '../../widgets/InputText.svelte';
   import { alertMessage as alertMessageStore} from '../../../stores/alertMessage.js';
   const baseURL = BASE_URL;
   export let id;
@@ -10,16 +11,48 @@
   let alertMessage = null;
   let memberDataTable;
   let alertMessageProps = {};
+  let inputName = '';
+  let inputEmail = '';
+  let inputCode = '';
 
-  onMount(() => {    
+  onMount(async () => {    
     alertMessageStore.subscribe(value => {
       if(value != null){
         alertMessage = value.component;
         alertMessageProps = value.props;
       }
     });
+    await memberDataTable.getSelect({
+      rowKey: 'discipline_id', 
+      respond: {
+        key: 'id',
+        value: 'name',
+      }, 
+      url: `${baseURL}admin/discipline/list`,
+    });
     memberDataTable.list();
-  });  
+  });
+  const search = () => {
+    // run validations
+    memberDataTable.queryParams = {
+      name: inputName,
+      email: inputEmail,
+      code: inputCode
+    };
+    memberDataTable.list();
+  }
+  
+  const clean = () => {
+    inputName = '';
+    inputEmail = '';
+    inputCode = '';
+    memberDataTable.queryParams = {
+      name: inputName,
+      email: inputEmail,
+      code: inputCode
+    };
+    memberDataTable.list();
+  };
 </script>
 
 <svelte:head>
@@ -34,6 +67,36 @@
   </div>
   <div class="row">
     <svelte:component this={alertMessage} {...alertMessageProps} />
+    <div class="row mb-3">
+      <div class="col-md-2">
+        <InputText 
+          label={'Código'}
+          bind:value={inputCode}
+          placeholder={'Ingrese el código de miembro'} 
+        />
+      </div> 
+      <div class="col-md-3">
+        <InputText 
+          label={'Nombre'}
+          bind:value={inputName}
+          placeholder={'Ingrese el nombre de miembro'} 
+        />
+      </div> 
+      <div class="col-md-3">
+        <InputText 
+          label={'Correo'}
+          bind:value={inputEmail}
+          placeholder={'Ingrese el correo de miembro'} 
+        />
+      </div> 
+      <div class="col-md-3" style="padding-top:27px;">
+        <button class="btn btn-warning" on:click="{clean}"><i class="fa fa-eraser" aria-hidden="true"></i>
+          Limpiar</button>
+        <button class="btn btn-success" on:click="{search}"><i class="fa fa-search" aria-hidden="true"></i>
+          Buscar Miembros</button>
+      </div>
+    </div>
+    <hr>
     <div class="col-md-12">
       <DataTable bind:this={memberDataTable} 
 				urlServices={{ 
@@ -50,33 +113,47 @@
 					},
 					code:{
 						type: 'input[text]',
+            style: 'width:100px;',
 					},
           last_names:{
 						type: 'input[text]',
+            style: 'width:200px;',
 					},
           names:{
 						type: 'input[text]',
+            style: 'width:150px;',
 					},
           email:{
 						type: 'input[text]',
+            style: 'width:200px;',
 					},
           phone:{
 						type: 'input[text]',
+            style: 'width:130px;',
 					},
           medical_obs:{
 						type: 'input[text]',
+            style: 'width:220px;',
 					},
           discipline_id:{
-						type: 'input[text]',
+						type: 'input[select]',
+            style: 'width:130px;',
 					},
 					actions:{
 						type: 'actions',
 						buttons: [
               {
 								type: 'link', 
-								icon: 'fa fa-pencil', 
+								icon: 'fa fa-user', 
+								style:'font-size:12px; margin-right:5px;',
+								url: '/admin/user/member/',
+                key: 'id',
+							},
+              {
+								type: 'link', 
+								icon: 'fa fa-bookmark', 
 								style:'font-size:12px; margin-right:10px;',
-								url: '/member/edit/',
+								url: '/admin/membership/',
                 key: 'id',
 							},
 							{

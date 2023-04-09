@@ -15,6 +15,7 @@
   export let urlServices;
   export let extraData = {};
   export let rows;
+  export let selectData = {};
   export let buttonAddRow = false;
   export let buttonAddRecord = false;
   export let buttonSave = false;
@@ -38,6 +39,27 @@
       pagination.page = 1;
     }
   });
+
+  export const getSelect = async (params) => {
+    try {
+      const response = await axios.get(params.url);
+      var dataFetched = response.data;
+      var tmp = [];
+      dataFetched.forEach((data) => {
+        // console.log(data);
+        tmp.push(
+          { 
+            id: data[params.respond.key],
+            name: data[params.respond.value]
+          }
+        ) 
+      });
+      selectData[params.rowKey] = tmp;
+      // handle the response data
+    } catch (error) {
+      console.log(error);
+    }
+  };
   
   export const list = () => {
     // console.log(data)
@@ -187,6 +209,22 @@
         }else{
           data[i][key] = 1;
         }
+        // update observer
+        if(observerSearch(idKey, rowKey, observer.delete) == false){
+          observer.edit.push({[idKey]: rowKey})
+        }
+      }
+    }
+  };
+
+  const selectChange = (event, key, value) => {
+    var idKey = event.target.parentElement.parentElement.firstChild.firstChild.getAttribute('key');
+    var rowKey = event.target.parentElement.parentElement.firstChild.firstChild.innerHTML;
+    // console.log(`id: ${idKey} - rowKey: ${rowKey} - value: ${value} - key: ${key}`);
+    for(var i = 0; i < data.length; i++){
+      if(data[i][idKey] == rowKey){
+        // update data
+        data[i][key] = event.target.value
         // update observer
         if(observerSearch(idKey, rowKey, observer.delete) == false){
           observer.edit.push({[idKey]: rowKey})
@@ -374,6 +412,16 @@
             {/if}
           {:else if rowProps.type == 'td'}
             {record[id]}
+          {:else if rowProps.type == 'input[select]'}
+            <select class="form-select" disabled={disabled} on:change={() => selectChange(event, id, record[id])}>
+              {#each selectData[id] as option}
+                {#if option.id == record[id]}
+                  <option value="{option.id}" selected>{option.name}</option>
+                {:else}
+                  <option value="{option.id}">{option.name}</option>
+                {/if}
+              {/each}
+            </select>
           {:else if rowProps.type =='autocomplete'}
             <Autocomplete 
               url={rowProps.url} 

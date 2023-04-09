@@ -1,7 +1,7 @@
 <svelte:options accessors={true} />
 <script>
   import { onMount } from 'svelte';
-  import random from '../Helpers/random.js';
+  import random from '../../helpers/random.js';
   export let validationMessage = '';
   export let placeholder = '';
   export let value = '';
