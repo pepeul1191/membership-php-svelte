@@ -144,16 +144,23 @@
 						buttons: [
               {
 								type: 'link', 
+								icon: 'fa fa-bullseye', 
+								style:'font-size:12px; margin-right:1px;',
+								url: '/admin/member/objective/',
+                key: 'id',
+							},
+              {
+								type: 'link', 
 								icon: 'fa fa-user', 
-								style:'font-size:12px; margin-right:5px;',
-								url: '/admin/user/member/',
+								style:'font-size:12px; margin-right:1px;',
+								url: '/admin/member/user/',
                 key: 'id',
 							},
               {
 								type: 'link', 
 								icon: 'fa fa-bookmark', 
-								style:'font-size:12px; margin-right:10px;',
-								url: '/admin/membership/',
+								style:'font-size:12px; margin-right:7px;',
+								url: '/admin/member/membership/',
                 key: 'id',
 							},
 							{

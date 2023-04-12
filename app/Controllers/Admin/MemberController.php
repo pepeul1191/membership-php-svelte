@@ -140,4 +140,34 @@ class MemberController extends BaseController
     http_response_code($status);
     echo $resp;
   }
+
+  function userFindOne($f3, $params)
+  {
+    // data
+    $data = [];
+    $status = 200;
+    $memberId = $params['memberId'];
+    $userMember = \Model::factory('App\\Models\\UserMember', 'app')
+                ->where('member_id', $memberId)->find_one();
+    if($userMember == false){
+      $status = 404;
+      $resp = 'member-has-no-user';
+    }else{
+      $user = \Model::factory('App\\Models\\User', 'app')
+                ->where('id', $userMember->{'user_id'})->find_one();
+      if($user == false){
+        $status = 404;
+        $resp = 'no-user-created';
+      }else{
+        $resp = json_encode(array(
+          'user_id' => $user->{'id'},
+          'user' => $user->{'user'},
+          'state' => $user->{'state'},
+        ));
+      }
+    }
+    // resp
+    http_response_code($status);
+    echo $resp;
+  }
 }

@@ -9,6 +9,7 @@
   import { Router, Route } from 'svelte-routing';
   import Member from '../pages/admin/Member.svelte';
   import Discipline from '../pages/admin/Discipline.svelte';
+  import MemberUser from '../pages/admin/MemberUser.svelte';
   // variables
   export let url = '';
   export let basepath = '/admin';
@@ -22,6 +23,7 @@
   <Route path="/" component="{Member}" />
   <Route path="/member" component="{Member}" />
   <Route path="/discipline" component="{Discipline}" />
+  <Route path="/member/user/:id" let:params><MemberUser id={params.id}/></Route>
   <!--
     <Route path="/*" component="{Redirect404}" />
   -->
