@@ -23,9 +23,21 @@ $f3->route('GET  /admin', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/member', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/member/user/@int', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/discipline', '\App\Controllers\AdminController->index');
+$f3->route('GET  /admin/level', '\App\Controllers\AdminController->index');
+$f3->route('GET  /admin/body_part', '\App\Controllers\AdminController->index');
+$f3->route('GET  /admin/objective', '\App\Controllers\AdminController->index');
 ### admin - discipline
 $f3->route('GET  /admin/discipline/list', '\App\Controllers\Admin\DisciplineController->list');
 $f3->route('POST /admin/discipline/save', '\App\Controllers\Admin\DisciplineController->save');
+### admin - objective
+$f3->route('GET  /admin/objective/list', '\App\Controllers\Admin\ObjectiveController->list');
+$f3->route('POST /admin/objective/save', '\App\Controllers\Admin\ObjectiveController->save');
+### admin - level
+$f3->route('GET  /admin/level/list', '\App\Controllers\Admin\LevelController->list');
+$f3->route('POST /admin/level/save', '\App\Controllers\Admin\LevelController->save');
+### admin - body_part
+$f3->route('GET  /admin/body_part/list', '\App\Controllers\Admin\BodyPartController->list');
+$f3->route('POST /admin/body_part/save', '\App\Controllers\Admin\BodyPartController->save');
 ### admin - member
 $f3->route('GET  /admin/member/list', '\App\Controllers\Admin\MemberController->list');
 $f3->route('POST /admin/member/save', '\App\Controllers\Admin\MemberController->save');

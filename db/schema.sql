@@ -10,6 +10,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `body_parts`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `body_parts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `disciplines`
 --
 
@@ -18,6 +31,19 @@
 CREATE TABLE `disciplines` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `levels`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `levels` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +66,7 @@ CREATE TABLE `members` (
   PRIMARY KEY (`id`),
   KEY `discipline_id` (`discipline_id`),
   CONSTRAINT `members_ibfk_1` FOREIGN KEY (`discipline_id`) REFERENCES `disciplines` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +97,7 @@ CREATE TABLE `objectives` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,10 +171,15 @@ INSERT INTO `schema_migrations` (version) VALUES
   ('20230407222653'),
   ('20230407234751'),
   ('20230408000606'),
+  ('20230408000607'),
   ('20230408000648'),
   ('20230408000659'),
   ('20230408002015'),
   ('20230408002334'),
   ('20230408002339'),
-  ('20230408020803');
+  ('20230408020803'),
+  ('20230413035225'),
+  ('20230413035244'),
+  ('20230413035253'),
+  ('20230413035259');
 UNLOCK TABLES;

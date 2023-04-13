@@ -152,10 +152,9 @@ class UserController extends BaseController
         array('name' => 'Miembros', 'url' => '/admin/member', 'items' => array()),
         array('name' => 'Datos Maestros', 'url' => '#', 'items' => array(
           array('name' => 'Disciplinas', 'url' => '/admin/discipline', 'items' => array()), 
-          array('name' => 'Puestos de Trabajo', 'url' => '/position', 'items' => array()), 
-          array('name' => 'Tipos de Servicios', 'url' => '/service_type', 'items' => array()), 
-          array('name' => 'Sedes - Lima', 'url' => '/branch/lima', 'items' => array()), 
-          array('name' => 'Sedes - Provincias', 'url' => '/branch/province', 'items' => array()), 
+          array('name' => 'Objetivos de Rutinas', 'url' => '/admin/objective', 'items' => array()), 
+          array('name' => 'Partes del Cuerpo', 'url' => '/admin/body_part', 'items' => array()), 
+          array('name' => 'Nivles de Paquetes de Ejercicios', 'url' => '/admin/level', 'items' => array()), 
         )),
       );
     }else{
