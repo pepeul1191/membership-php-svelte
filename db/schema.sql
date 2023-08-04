@@ -19,7 +19,7 @@ CREATE TABLE `body_parts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +36,24 @@ CREATE TABLE `disciplines` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `exercises`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `exercises` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `image_url` varchar(30) NOT NULL,
+  `video_url` varchar(100) NOT NULL,
+  `body_part_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `body_part_id` (`body_part_id`),
+  CONSTRAINT `exercises_ibfk_1` FOREIGN KEY (`body_part_id`) REFERENCES `exercises` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `levels`
 --
 
@@ -45,7 +63,7 @@ CREATE TABLE `levels` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +115,7 @@ CREATE TABLE `objectives` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,5 +199,6 @@ INSERT INTO `schema_migrations` (version) VALUES
   ('20230413035225'),
   ('20230413035244'),
   ('20230413035253'),
-  ('20230413035259');
+  ('20230413035259'),
+  ('20230722011439');
 UNLOCK TABLES;

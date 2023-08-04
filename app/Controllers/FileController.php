@@ -32,6 +32,7 @@ class FileController extends BaseController
       $extension = explode('.', $_FILES['file']['name']); $extension = end($extension);
       $status = 200;
       $path = UPLOAD_PATH. $rand . '.' . $extension;
+      echo $path;exit();
       $response_path = 'uploads/' . $rand . '.' . $extension;
       // extra path is in POST param
       if(

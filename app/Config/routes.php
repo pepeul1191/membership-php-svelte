@@ -26,9 +26,13 @@ $f3->route('GET  /admin/discipline', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/level', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/body_part', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/objective', '\App\Controllers\AdminController->index');
+$f3->route('GET  /admin/exercise', '\App\Controllers\AdminController->index');
 ### admin - discipline
 $f3->route('GET  /admin/discipline/list', '\App\Controllers\Admin\DisciplineController->list');
 $f3->route('POST /admin/discipline/save', '\App\Controllers\Admin\DisciplineController->save');
+### admin - exercise
+$f3->route('GET  /admin/exercise/list', '\App\Controllers\Admin\ExerciseController->list');
+$f3->route('POST /admin/exercise/save', '\App\Controllers\Admin\ExerciseController->save');
 ### admin - objective
 $f3->route('GET  /admin/objective/list', '\App\Controllers\Admin\ObjectiveController->list');
 $f3->route('POST /admin/objective/save', '\App\Controllers\Admin\ObjectiveController->save');

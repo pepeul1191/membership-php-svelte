@@ -150,8 +150,9 @@ class UserController extends BaseController
       $resp = array(
         array('name' => 'Home', 'url' => '/admin', 'items' => array()),
         array('name' => 'Miembros', 'url' => '/admin/member', 'items' => array()),
+        array('name' => 'Ejercicios', 'url' => '/admin/exercise', 'items' => array()),
         array('name' => 'Datos Maestros', 'url' => '#', 'items' => array(
-          array('name' => 'Disciplinas', 'url' => '/admin/discipline', 'items' => array()), 
+          array('name' => 'Disciplinas', 'url' => '/admin/discipline', 'items' => array()),
           array('name' => 'Objetivos de Rutinas', 'url' => '/admin/objective', 'items' => array()), 
           array('name' => 'Partes del Cuerpo', 'url' => '/admin/body_part', 'items' => array()), 
           array('name' => 'Nivles de Paquetes de Ejercicios', 'url' => '/admin/level', 'items' => array()), 
