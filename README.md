@@ -12,9 +12,9 @@ Servidor de desarrollo
 
 Migraciones con DBMATE - accesos/sqlite3:
 
-    $ dbmate -d "db/migrations" -e "DB" new <<nombre_de_migracion>>
-    $ dbmate -d "db/migrations" -e "DB" up
-    $ dbmate -d "db/migrations" -e "DB" rollback
+    $ npm run dbmate:new <<nombre_de_migracion>>
+    $ npm run dbmate:up
+    $ npm run dbmate:rollback
 
 ## Archivo .env
 

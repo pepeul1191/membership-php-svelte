@@ -88,6 +88,6 @@ class ErrorController extends BaseController
     ));
     // response
     http_response_code($status);
-    echo $this->render('error/access', $locals);
+    echo $this->render('error/access');
   }
 }

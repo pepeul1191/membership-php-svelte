@@ -8,11 +8,12 @@
   let messageColor = '';
   let queryParams;
   // functions
-  $: queryParams = queryString.parse(location.search);
+  console.log(location)
+  $: queryParams = queryString.parse(window.location.search);
   onMount(() => {
 		// console.log('index');  
     // console.log(CSRF);
-    // console.log(queryParams);
+    console.log(queryParams);
     if(queryParams.error == 'csrf-mismatch'){
       message = 'Error de autenticación CSRF';
       messageColor = 'text-danger';

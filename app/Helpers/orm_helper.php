@@ -2,7 +2,6 @@
 
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-
 ORM::configure('mysql:host=localhost;port=3306;dbname=' . $_ENV['DB_NAME'] . ';charset=utf8;', null, 'app');
 ORM::configure('username', $_ENV['DB_USER'], 'app');
 ORM::configure('password', $_ENV['DB_PASS'], 'app');

@@ -42,6 +42,6 @@ class HomeController extends BaseController
       'javascripts' => javascriptsAdmin($f3->get('staticURL')),
     ));
     http_response_code(200);
-    echo $this->render('admin/index', $locals);
+    echo $this->render('admin/index');
   }
 }

@@ -226,8 +226,14 @@
         // update data
         data[i][key] = event.target.value
         // update observer
-        if(observerSearch(idKey, rowKey, observer.delete) == false){
-          observer.edit.push({[idKey]: rowKey})
+        if(String(rowKey).includes('tmp')){
+          if(observerSearch(idKey, rowKey, observer.new) == false){
+            observer.new.push({[idKey]: rowKey})
+          }
+        }else{
+          if(observerSearch(idKey, rowKey, observer.delete) == false){
+            observer.edit.push({[idKey]: rowKey})
+          }
         }
       }
     }
@@ -246,6 +252,9 @@
         case 'autocomplete':
           tmp[key] = '';
           break;
+        case 'input[select]':
+          tmp[key] = 'E';
+          break;
         case 'actions':
           tmp[key] = undefined;
           break;
@@ -253,6 +262,7 @@
           break;
       }
     }
+    //console.log(tmp)
     data.push(tmp)
     data = data // for bind update
   }
@@ -414,6 +424,9 @@
             {record[id]}
           {:else if rowProps.type == 'input[select]'}
             <select class="form-select" disabled={disabled} on:change={() => selectChange(event, id, record[id])}>
+              {#if record[id] == 'E'}
+                <option value="E" selected></option>
+              {/if}
               {#each selectData[id] as option}
                 {#if option.id == record[id]}
                   <option value="{option.id}" selected>{option.name}</option>

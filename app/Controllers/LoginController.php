@@ -40,7 +40,7 @@ class LoginController extends BaseController
       'javascripts' => javascriptsIndex($f3->get('staticURL')),
     ));
     http_response_code(200);
-    echo $this->render('login/index', $locals);
+    echo $this->render('login/index');
   }
 
   function access($f3, $args)

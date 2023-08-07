@@ -16,6 +16,7 @@
   <base href="<?php echo $href; ?>">
   <title><?php echo($title); ?></title>
   <script type="text/javascript">
+    console.log(<?php enterpriseData(); ?>);
     const BASE_URL = "<?php echo $baseURL;?>";
     const STATIC_URL = "<?php echo $staticURL;?>";
     const ENTERPRISE_DATA = JSON.parse('<?php echo htmlspecialchars_decode(enterpriseData(),ENT_QUOTES); ?>');

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2308b712a857e51eb6a63c14e7d49ddb",
+    "content-hash": "9369794ceacedbdc054f4f2e33dcecf3",
     "packages": [
         {
             "name": "bcosca/fatfree-core",
-            "version": "3.8.1",
+            "version": "3.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/f3-factory/fatfree-core.git",
-                "reference": "f6ea45472f55a1ecabd4ced74cb56f0efd6af34e"
+                "reference": "774692ce7698904d3cb35bbd4f79376bb17eeddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/f3-factory/fatfree-core/zipball/f6ea45472f55a1ecabd4ced74cb56f0efd6af34e",
-                "reference": "f6ea45472f55a1ecabd4ced74cb56f0efd6af34e",
+                "url": "https://api.github.com/repos/f3-factory/fatfree-core/zipball/774692ce7698904d3cb35bbd4f79376bb17eeddc",
+                "reference": "774692ce7698904d3cb35bbd4f79376bb17eeddc",
                 "shasum": ""
             },
             "require": {
@@ -35,7 +35,11 @@
             ],
             "description": "A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!",
             "homepage": "http://fatfreeframework.com/",
-            "time": "2022-11-04T23:15:19+00:00"
+            "support": {
+                "issues": "https://github.com/f3-factory/fatfree-core/issues",
+                "source": "https://github.com/f3-factory/fatfree-core/tree/3.8.2"
+            },
+            "time": "2023-07-23T22:11:30+00:00"
         },
         {
             "name": "j4mie/idiorm",
@@ -97,6 +101,10 @@
                 "orm",
                 "query builder"
             ],
+            "support": {
+                "issues": "https://github.com/j4mie/idiorm/issues",
+                "source": "https://github.com/j4mie/idiorm"
+            },
             "time": "2022-07-18T03:49:49+00:00"
         },
         {
@@ -160,6 +168,10 @@
                 "orm",
                 "paris"
             ],
+            "support": {
+                "issues": "https://github.com/j4mie/paris/issues",
+                "source": "https://github.com/j4mie/paris"
+            },
             "time": "2017-03-21T02:13:30+00:00"
         },
         {
@@ -230,6 +242,10 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "support": {
+                "issues": "https://github.com/PHPMailer/PHPMailer/issues",
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.8.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/Synchro",
@@ -297,6 +313,10 @@
                 "php",
                 "type"
             ],
+            "support": {
+                "issues": "https://github.com/schmittjoh/php-option/issues",
+                "source": "https://github.com/schmittjoh/php-option/tree/1.9.1"
+            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -372,6 +392,9 @@
                 "polyfill",
                 "portable"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.27.0"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -454,6 +477,10 @@
                 "env",
                 "environment"
             ],
+            "support": {
+                "issues": "https://github.com/vlucas/phpdotenv/issues",
+                "source": "https://github.com/vlucas/phpdotenv/tree/v4.3.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -477,5 +504,5 @@
         "php": "^7.2 || ^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.3.0"
 }
