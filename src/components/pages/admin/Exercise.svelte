@@ -45,6 +45,7 @@
 				}}
 				buttonAddRow={true},
 				buttonSave={true},
+				colspanFooter=5,
 				rows={{
 					id: {
 						style: 'color: red; display:none;',
@@ -63,7 +64,7 @@
           image_url:{
 						type: 'upload',
             style: 'text-align: center',
-            tableKeyURL: 'url',
+            tableKeyURL: 'image_url',
             tableRecordKey: 'id',
 					},
 					actions:{
@@ -89,6 +90,10 @@
 					},
           {
 						caption: 'Video URL',
+					},
+					{
+						caption: 'Imágen',
+						style:'text-align: center;',
 					},
 					{
 						caption: 'Operaciones',

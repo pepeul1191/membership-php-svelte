@@ -56,8 +56,11 @@ class ExerciseController extends BaseController
       // news
       if(count($news) > 0){
 				foreach ($news as &$new) {
-				  $n = \Model::factory('App\\Models\\Discipline', 'app')->create();
+				  $n = \Model::factory('App\\Models\\Exercise', 'app')->create();
 					$n->name = $new['name'];
+          $n->image_url = $new['image_url'];
+          $n->video_url = $new['video_url'];
+          $n->body_part_id = intval($new['body_part_id']);
 					$n->save();
 				  $temp = [];
 				  $temp['tempId'] = $new['id'];
@@ -71,15 +74,18 @@ class ExerciseController extends BaseController
       // edits
       if(count($edits) > 0){
 				foreach ($edits as &$edit) {
-          $e = \Model::factory('App\\Models\\Discipline', 'app')->find_one($edit['id']);
+          $e = \Model::factory('App\\Models\\Exercise', 'app')->find_one($edit['id']);
 					$e->name = $edit['name'];
+          $e->image_url = $edit['image_url'];
+          $e->video_url = $edit['video_url'];
+          $e->body_part_id = $edit['body_part_id'];
 					$e->save();
         }
       }
       // deletes
       if(count($deletes) > 0){
 				foreach ($deletes as &$delete) {
-			    $d = \Model::factory('App\\Models\\Discipline', 'app')->find_one($delete['id']);
+			    $d = \Model::factory('App\\Models\\Exercise', 'app')->find_one($delete['id']);
 			    $d->delete();
 				}
       }

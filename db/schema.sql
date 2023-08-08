@@ -49,7 +49,7 @@ CREATE TABLE `exercises` (
   `body_part_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `body_part_id` (`body_part_id`),
-  CONSTRAINT `exercises_ibfk_1` FOREIGN KEY (`body_part_id`) REFERENCES `exercises` (`id`) ON DELETE CASCADE
+  CONSTRAINT `exercises_ibfk_1` FOREIGN KEY (`body_part_id`) REFERENCES `body_parts` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

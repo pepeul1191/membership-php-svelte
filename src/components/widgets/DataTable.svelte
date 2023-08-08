@@ -97,6 +97,7 @@
             tmp[key]= record[key];
           }
         }
+        console.log(tmp)
         data.push(tmp);
       });
     })
@@ -185,6 +186,14 @@
     if(typeof(event) !== 'undefined' && event !== null){
       var idKey = event.detail.tableRecordKey;
       var rowKey = event.detail.tableRecordId;
+      var key = event.detail.key;
+      for(var i = 0; i < data.length; i++){
+        if(data[i][idKey] == rowKey){
+          // update data
+          data[i][key] = event.detail.urlFile;
+        }
+      }
+      //data[idKey][key] = event.target.value;
       if(String(rowKey).includes('tmp')){
         if(observerSearch(idKey, rowKey, observer.new) == false){
           observer.new.push({[idKey]: rowKey})
@@ -449,7 +458,7 @@
           {:else if rowProps.type =='upload'}
             <UploadFile 
               table={true} 
-              bind:urlFile={record.url} 
+              bind:urlFile={record[rowProps.tableKeyURL]} 
               disabledView={false} 
               on:fileUploaded={fileUploaded}
               bind:rowId={record[rowProps.rowId]} 
