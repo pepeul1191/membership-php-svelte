@@ -4,8 +4,8 @@ require 'vendor/autoload.php';
 
 // contants
 define('BASE_PATH', dirname(__FILE__));
-define('VIEW_PATH', BASE_PATH . '/app/Views');
-define('UPLOAD_PATH', BASE_PATH . '/public/uploads/');
+define('VIEW_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR  . 'Views' . DIRECTORY_SEPARATOR);
+define('UPLOAD_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR  . 'uploads' . DIRECTORY_SEPARATOR);
 // timezone
 date_default_timezone_set('America/Lima');
 // load .env

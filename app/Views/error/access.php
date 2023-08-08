@@ -1,4 +1,4 @@
-<?php include_once(VIEW_PATH . '/partials/blank_header.php') ?>
+<?php include_once(VIEW_PATH . 'partials' . DIRECTORY_SEPARATOR . 'blank_header.php') ?>
 
 <div class="row text-center">
   <h1 class="align-text-bottom"><?php echo $number; ?></h1>
@@ -11,4 +11,4 @@
 	<a href="<?php echo($baseURL . $hrefError); ?>" class="return-btn"><i class="fa fa-home"></i>Ir al Inicio</a>
 </div>
 
-<?php include_once(VIEW_PATH . '/partials/blank_footer.php') ?>
+<?php include_once(VIEW_PATH . 'partials' . DIRECTORY_SEPARATOR . 'blank_footer.php') ?>

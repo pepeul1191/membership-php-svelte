@@ -27,7 +27,7 @@ class ErrorController extends BaseController
           'message' => 'Archivo no encontrado',
           'description' => 'La página que busca no se encuentra en el servidor',
           'icon' => 'fa fa-exclamation-triangle',
-          'hrefError' => '',
+          'hrefError' => 'login',
         ];
         $status = 404;
         break;
