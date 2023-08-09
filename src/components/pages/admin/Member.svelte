@@ -89,7 +89,7 @@
           placeholder={'Ingrese el correo de miembro'} 
         />
       </div> 
-      <div class="col-md-3" style="padding-top:27px;">
+      <div class="col-md-4" style="padding-top:27px;">
         <button class="btn btn-warning" on:click="{clean}"><i class="fa fa-eraser" aria-hidden="true"></i>
           Limpiar</button>
         <button class="btn btn-success" on:click="{search}"><i class="fa fa-search" aria-hidden="true"></i>

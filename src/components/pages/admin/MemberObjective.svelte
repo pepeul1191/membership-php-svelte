@@ -75,14 +75,14 @@
 			<h2>{title}</h2>
 		</div>
     <svelte:component this={alertMessage} {...alertMessageProps} />
-    <div class="col-md-5">
+    <div class="col-md-12">
       <InputCheckGroup bind:this={memberObjective} 
         url={`${baseURL}admin/member/objective?member_id=${id}`}
         key = {{ id: 'id', name: 'name', exist: 'exist' }}
         inline = {true}
         label = {'Objetivos del Miembro'}
         disabled = {false}
-        columnSize = {6}
+        columnSize = {3}
       />
     </div>
     <div class="col-md-12 pull-right">

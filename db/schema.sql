@@ -44,7 +44,7 @@ CREATE TABLE `disciplines` (
 CREATE TABLE `exercises` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `image_url` varchar(30) NOT NULL,
+  `image_url` varchar(60) NOT NULL,
   `video_url` varchar(100) NOT NULL,
   `body_part_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -102,6 +102,39 @@ CREATE TABLE `members_objectives` (
   KEY `objective_id` (`objective_id`),
   CONSTRAINT `members_objectives_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE CASCADE,
   CONSTRAINT `members_objectives_ibfk_2` FOREIGN KEY (`objective_id`) REFERENCES `objectives` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `membership_states`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `membership_states` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(12) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `memberships`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `memberships` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `beginning` date NOT NULL,
+  `ending` date NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `membership_state_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `member_id` (`member_id`),
+  KEY `fk_memberships_membership_states` (`membership_state_id`),
+  CONSTRAINT `fk_memberships_membership_states` FOREIGN KEY (`membership_state_id`) REFERENCES `membership_states` (`id`),
+  CONSTRAINT `memberships_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -200,5 +233,9 @@ INSERT INTO `schema_migrations` (version) VALUES
   ('20230413035244'),
   ('20230413035253'),
   ('20230413035259'),
-  ('20230722011439');
+  ('20230722011439'),
+  ('20230809144748'),
+  ('20230809145027'),
+  ('20230809145940'),
+  ('20230809151520');
 UNLOCK TABLES;

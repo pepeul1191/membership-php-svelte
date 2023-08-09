@@ -24,6 +24,7 @@
   export let queryParams = {};
   export let disabled = false;
   export let colspanFooter = 4;
+  export let extraReplace = [];
   export let messages = {
     notChanges: 'No ha ejecutado cambios en la tabla',
     list404: 'Rercuso no encontrado para listar los elmentos de la tabla',
@@ -348,7 +349,13 @@
           }
         })
         .then(function (response) {
+          console.log(extraReplace)
           response.data.forEach(created => {
+            if(extraReplace.length != 0){
+              extraReplace.forEach(value => {
+                dataSearch(recordId, created.tmp)[value] = created[value];
+              })
+            }
             dataSearch(recordId, created.tmp)[recordId] = created[recordId];
           });
           data = data;
@@ -365,6 +372,12 @@
             if(error.response.status == 404){
               launchAlert({
                 message: messages.save404,
+                type: 'danger',
+                timeOut: 5000
+              });
+            }else if(error.response.status == 501){
+              launchAlert({
+                message: error.response.data,
                 type: 'danger',
                 timeOut: 5000
               });
@@ -423,6 +436,8 @@
             <span key="{id}">{record[id]}</span>
           {:else if rowProps.type == 'input[text]'}
             <input type="text" disabled={disabled} key="{id}" on:keydown={inputTextKeyDown} bind:value={record[id]}>
+          {:else if rowProps.type == 'input[date]'}
+            <input type="date" disabled={disabled} key="{id}" on:input={inputTextKeyDown} on:keydown={inputTextKeyDown} bind:value={record[id]}>
           {:else if rowProps.type == 'input[check]'}
             {#if record[id] == 1}
               <input type="checkbox" disabled={disabled} key="{id}" on:change={() => checkBoxChange(event, id, record[id])} checked={true}>
@@ -540,7 +555,7 @@ thead th {
   padding: 2.5px !important;
 }
 
-td input[type="text"]{
+td input[type="text"], td input[type="date"]{
   width: 100%;
   border: 0px;
   background-color: transparent;
