@@ -36,7 +36,7 @@
 		<div class="col-lg-12 page-header">
 			<h2>Historial de Membresias del Miembro</h2>
 		</div>
-		<div class="col-md-12">
+		<div class="col-md-7">
 			<DataTable bind:this={membershipMemberTable} 
 				urlServices={{ 
 					list: `${baseURL}admin/member/membership`, 
@@ -84,10 +84,10 @@
 						style: 'display:none;',
 					},
 					{
-						caption: 'Inicio (yyyy/mm/dd)',
+						caption: 'Fecha de Inicio',
 					},
           {
-						caption: 'Fin (yyyy/mm/dd)',
+						caption: 'Fecha de Fin',
 					},
           {
 						caption: 'Estado',

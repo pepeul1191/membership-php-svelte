@@ -83,6 +83,7 @@ class MemberMembershipController extends BaseController
             $status = 501;
             throw new CustomException('La fecha de inicio tiene que ser antes que la fecha de fin. Los cambios realizados no han sido grabados.');
           }
+          // create
 					$n->beginning = date('Y-m-d', strtotime($new['beginning']));
           $n->ending = date('Y-m-d', strtotime($new['ending']));
           $n->membership_state_id = 1;
@@ -101,8 +102,31 @@ class MemberMembershipController extends BaseController
       // edits
       if(count($edits) > 0){
 				foreach ($edits as &$edit) {
+          // beginning date
+          $beginningTimestamp = strtotime($edit['beginning']);
+          $beginningDate = new \DateTime();
+          $beginningDate->setTimestamp($beginningTimestamp);
+          $beginningDate->format('Y-m-d');
+          // ending date
+          $endingTimestamp = strtotime($edit['ending']);
+          $endingDate = new \DateTime();
+          $endingDate->setTimestamp($endingTimestamp);
+          $endingDate->format('Y-m-d');
+          // validate ending after beginning
+          if($beginningDate >= $endingDate){
+            $status = 501;
+            throw new CustomException('La fecha de inicio tiene que ser antes que la fecha de fin. Los cambios realizados no han sido grabados.');
+          }
+          // edit
           $e = \Model::factory('App\\Models\\Membership', 'app')->find_one($edit['id']);
-					$e->name = $edit['name'];
+					$e->beginning = date('Y-m-d', strtotime($edit['beginning']));
+          $e->ending = date('Y-m-d', strtotime($edit['ending']));
+					$e->save();
+	        array_push($createdIds, array(
+            'tmp' => $edit['id'],
+            'id' => $e->id,
+            'membership_state_name' => 'ACTIVOXD'
+          ));
 					$e->save();
         }
       }
