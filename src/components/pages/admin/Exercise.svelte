@@ -2,10 +2,16 @@
   import { onMount } from 'svelte';
 	import { alertMessage as alertMessageStore} from '../../../stores/alertMessage.js';
   import DataTable from '../../widgets/DataTable.svelte';
+	import InputText from '../../widgets/InputText.svelte';
+	import InputSelect from '../../widgets/InputSelect.svelte';
 	const baseURL= BASE_URL;
   let alertMessage = null;
   let alertMessageProps = {};
   let exerciseDataTable;
+	let disabled = false;
+  // search form
+	let inputName; 
+  let bodyPartId; let bodyPart = ''; let inputBodyPart;
 
   onMount(async() => {
     // console.log('index');
@@ -15,6 +21,9 @@
         alertMessageProps = value.props;
       }
     });
+		// postion select
+    inputBodyPart.list();
+		// table
     await exerciseDataTable.getSelect({
       rowKey: 'body_part_id', 
       respond: {
@@ -25,6 +34,23 @@
     });
     exerciseDataTable.list();
   });
+
+	const search = () => {
+    // run validations
+    exerciseDataTable.queryParams = {
+      name: inputName,
+      body_part_id: bodyPartId,
+    };
+    exerciseDataTable.list();
+  }
+  
+  const clean = () => {
+    inputName = '';
+    bodyPartId = '';
+    exerciseDataTable.queryParams = {
+    };
+    exerciseDataTable.list();
+  };
 </script>
 
 <svelte:head>
@@ -37,6 +63,40 @@
 		<div class="col-lg-12 page-header">
 			<h2>Lista de Ejercicios</h2>
 		</div>
+		<div class="row mb-3">
+      <div class="col-md-6">
+				<div class="row">
+					<div class="col-md-6">
+						<InputText 
+							label={'Nombre'}
+							bind:value={inputName}
+							placeholder={'Ingrese el nombre de un ejercicio'} 
+						/>
+					</div> 
+					<div class="col-md-6">
+						<InputSelect 
+							label={'Parte del Cuerpo'}
+							bind:value={bodyPart}
+							placeholder={'Nombre de la parte del cuerpo'} 
+							disabled={disabled}
+							url={`${baseURL}admin/body_part/list`}
+							validations={[
+							]}
+							key = {{ id: 'id', name: 'name'}}
+							bind:selectedValue={bodyPartId}
+							bind:this={inputBodyPart}
+						/>
+					</div>
+				</div>
+      </div> 
+      <div class="col-md-3" style="padding-top:27px;">
+        <button class="btn btn-warning" on:click="{clean}"><i class="fa fa-eraser" aria-hidden="true"></i>
+          Limpiar</button>
+        <button class="btn btn-success" on:click="{search}"><i class="fa fa-search" aria-hidden="true"></i>
+          Buscar Ejercicios</button>
+      </div>
+    </div>
+    <hr>
 		<div class="col-md-12">
 			<DataTable bind:this={exerciseDataTable} 
 				urlServices={{ 

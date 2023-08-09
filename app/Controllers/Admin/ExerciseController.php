@@ -28,9 +28,22 @@ class ExerciseController extends BaseController
     $status = 200;
     // logic
     try {
-      $rs = \Model::factory('App\\Models\\Exercise', 'app')
-        ->find_array();
-      $resp = json_encode($rs);
+      $stmt = \Model::factory('App\\Models\\Exercise', 'app');
+      // filter member
+      if(
+        $f3->get('GET.name') != null
+      ){
+        $name = $f3->get('GET.name');
+        $stmt = $stmt->where_like('name', '%' . $name . '%');
+      }
+      if(
+        $f3->get('GET.body_part_id') != null
+      ){
+        $bodyPartId = $f3->get('GET.body_part_id');
+        $stmt = $stmt->where_raw('body_part_id = ' . $bodyPartId);
+      }
+      // execute query
+      $resp = json_encode($stmt->find_array());
     }catch (\Exception $e) {
       $status = 500;
       $resp = json_encode(['ups', $e->getMessage()]);
