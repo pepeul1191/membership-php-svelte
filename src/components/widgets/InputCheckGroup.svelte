@@ -2,8 +2,8 @@
 <script>
   import { onMount } from 'svelte';
   import axios from 'axios';
-  import { CSRF } from '../Stores/csrf.js';
-  import random from '../Helpers/random.js';
+  import { CSRF } from '../../stores/csrf.js';
+  import random from '../../helpers/random.js';
   export let inline = false;
   export let queryParams = {};
   export let disabled = false;
@@ -68,7 +68,7 @@
       }
     })
     .then(function () {
-      display = true;
+      //display = true;
     });
   };
 
@@ -96,6 +96,14 @@
       }
     }
     return resp;
+  };
+
+  export const updateOriginData = () => {
+    console.log(data);
+    $: {
+      originData = data.map(item => JSON.parse(JSON.stringify(item)));
+    }
+    console.log(originData)
   };
 
   export const selectAll = () => {

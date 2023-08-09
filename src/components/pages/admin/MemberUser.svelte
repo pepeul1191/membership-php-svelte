@@ -3,7 +3,7 @@
   import { getMemberUser } from '../../../services/UserService.js';
   let baseURL = BASE_URL;
   let staticURL = STATIC_URL;
-  let title = 'Gestión de Usiario del Miembro';
+  let title = 'Gestión de Usuario del Miembro';
   // service header data
   export let id;
 

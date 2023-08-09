@@ -10,6 +10,7 @@
   import Member from '../pages/admin/Member.svelte';
   import Discipline from '../pages/admin/Discipline.svelte';
   import MemberUser from '../pages/admin/MemberUser.svelte';
+  import MemberObjective from '../pages/admin/MemberObjective.svelte';
   import Objective from '../pages/admin/Objective.svelte';
   import BodyPart from '../pages/admin/BodyPart.svelte';
   import Level from '../pages/admin/Level.svelte';
@@ -32,6 +33,7 @@
   <Route path="/level" component="{Level}" />
   <Route path="/exercise" component="{Exercise}" />
   <Route path="/member/user/:id" let:params><MemberUser id={params.id}/></Route>
+  <Route path="/member/objective/:id" let:params><MemberObjective id={params.id}/></Route>
   <!--
     <Route path="/*" component="{Redirect404}" />
   -->

@@ -22,6 +22,7 @@ $f3->route('GET  /access/user/info', '\App\Controllers\Access\UserController->in
 $f3->route('GET  /admin', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/member', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/member/user/@int', '\App\Controllers\AdminController->index');
+$f3->route('GET  /admin/member/objective/@int', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/discipline', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/level', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/body_part', '\App\Controllers\AdminController->index');
@@ -45,6 +46,9 @@ $f3->route('POST /admin/body_part/save', '\App\Controllers\Admin\BodyPartControl
 ### admin - member
 $f3->route('GET  /admin/member/list', '\App\Controllers\Admin\MemberController->list');
 $f3->route('POST /admin/member/save', '\App\Controllers\Admin\MemberController->save');
+### admin - member objective
+$f3->route('GET  /admin/member/objective', '\App\Controllers\Admin\MemberObjectiveController->list');
+$f3->route('POST /admin/member/objective', '\App\Controllers\Admin\MemberObjectiveController->save');
 ### admin - member - user
 $f3->route('GET  /admin/member/@memberId/user', '\App\Controllers\Admin\MemberController->userFindOne');
 #### rest - file
