@@ -2,8 +2,6 @@
   import { onMount } from 'svelte';
 	import { alertMessage as alertMessageStore} from '../../../stores/alertMessage.js';
   import DataTable from '../../widgets/DataTable.svelte';
-	import InputText from '../../widgets/InputText.svelte';
-	import InputSelect from '../../widgets/InputSelect.svelte';
 	const baseURL= BASE_URL;
   let alertMessage = null;
   let alertMessageProps = {};
@@ -11,9 +9,9 @@
 	let packageMembershipTable;
 	let disabled = false;
 	let hidePackages = 'none';
-	export let membershipId = null;
   // search form
 	export let memberId;
+	export let showModal = false
 
   onMount(() => {
     // console.log('index');
@@ -37,12 +35,42 @@
 
 	const loadExersices = (membershipPackage) => {
 		console.log(membershipPackage);
+		showModal = true;
   };
+
+	const closeModal = () => {
+		showModal = false;
+  };
+
+	document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      showModal = false;
+    }
+  });
 </script>
 
 <svelte:head>
 	<title>Gestión de Membresias del Miembro</title>
 </svelte:head>
+{#if showModal}
+	<div class="modal fade show" on:click={closeModal} tabindex="-1" style="display: block;">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Ejercicios del Paquete</h5>
+					<button type="button" class="btn-close" on:click={closeModal}></button>
+				</div>
+				<div class="modal-body">
+					<p>This is the modal content.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" on:click={closeModal}>Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-backdrop fade show"></div>
+{/if}
 
 <div class="container">
 	<div class="row">
