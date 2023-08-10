@@ -28,3 +28,7 @@ Migraciones con DBMATE - accesos/sqlite3:
 ## Habilitar GROUP BY MySQL
 
     $ SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+
+## TODO
+
++ Procedimiento almacenado en la base de datos para actualizar el estado de las membresías de ACTIVO a VENCIDO.

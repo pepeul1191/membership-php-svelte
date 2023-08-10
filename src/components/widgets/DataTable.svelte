@@ -98,7 +98,6 @@
             tmp[key]= record[key];
           }
         }
-        console.log(tmp)
         data.push(tmp);
       });
     })
