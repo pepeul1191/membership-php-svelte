@@ -11,7 +11,7 @@
 	let packageMembershipTable;
 	let disabled = false;
 	let hidePackages = 'none';
-	let membershipId = null;
+	export let membershipId = null;
   // search form
 	export let memberId;
 
@@ -29,9 +29,10 @@
   });
 
 	const loadPackages = (memberShip) => {
-		membershipId = memberShip.id;
 		hidePackages = 'block';
+		packageMembershipTable.urlServices.list = `${baseURL}admin/membership/package?membership_id=${memberShip.id}`;
 		packageMembershipTable.list();
+		packageMembershipTable.extraData.membership_id = memberShip.id;
   };
 
 	const loadExersices = (membershipPackage) => {
@@ -137,12 +138,6 @@
 				buttonAddRow={true},
 				buttonSave={true},
 				colspanFooter=5,
-        queryParams= {{
-          membership_id: membershipId
-        }}
-        extraData= {{
-          membership_id: membershipId
-        }}
 				rows={{
 					id: {
 						style: 'color: red; display:none;',

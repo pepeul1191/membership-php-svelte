@@ -152,6 +152,22 @@ CREATE TABLE `objectives` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `packages`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `packages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  `membership_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `membership_id` (`membership_id`),
+  CONSTRAINT `packages_ibfk_1` FOREIGN KEY (`membership_id`) REFERENCES `memberships` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `schema_migrations`
 --
 
@@ -237,5 +253,6 @@ INSERT INTO `schema_migrations` (version) VALUES
   ('20230809144748'),
   ('20230809145027'),
   ('20230809145940'),
-  ('20230809151520');
+  ('20230809151520'),
+  ('20230810174001');
 UNLOCK TABLES;
