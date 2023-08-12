@@ -168,6 +168,27 @@ CREATE TABLE `packages` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `packages_exercises`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `packages_exercises` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `position` int(11) DEFAULT NULL,
+  `reps` int(11) DEFAULT NULL,
+  `sets` int(11) DEFAULT NULL,
+  `package_id` int(11) DEFAULT NULL,
+  `exercise_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `package_id` (`package_id`),
+  KEY `exercise_id` (`exercise_id`),
+  CONSTRAINT `packages_exercises_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `packages` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `packages_exercises_ibfk_2` FOREIGN KEY (`exercise_id`) REFERENCES `exercises` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `schema_migrations`
 --
 
@@ -254,5 +275,6 @@ INSERT INTO `schema_migrations` (version) VALUES
   ('20230809145027'),
   ('20230809145940'),
   ('20230809151520'),
-  ('20230810174001');
+  ('20230810174001'),
+  ('20230811011809');
 UNLOCK TABLES;

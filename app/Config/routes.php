@@ -56,6 +56,9 @@ $f3->route('POST /admin/member/membership', '\App\Controllers\Admin\MemberMember
 ### admin - membership package
 $f3->route('GET  /admin/membership/package', '\App\Controllers\Admin\MembershipPackageController->list');
 $f3->route('POST /admin/membership/package', '\App\Controllers\Admin\MembershipPackageController->save');
+### admin - package exercise
+$f3->route('GET  /admin/package/exercise', '\App\Controllers\Admin\PackageExerciseController->list');
+$f3->route('POST /admin/package/exercise', '\App\Controllers\Admin\PackageExerciseController->save');
 ### admin - member - user
 $f3->route('GET  /admin/member/@memberId/user', '\App\Controllers\Admin\MemberController->userFindOne');
 #### rest - file

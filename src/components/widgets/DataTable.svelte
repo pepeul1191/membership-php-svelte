@@ -434,7 +434,7 @@
           {#if rowProps.type == 'id'}
             <span key="{id}">{record[id]}</span>
           {:else if rowProps.type == 'input[text]'}
-            <input type="text" disabled={disabled} key="{id}" on:keydown={inputTextKeyDown} bind:value={record[id]}>
+            <input type="text" style="{rowProps.style}" disabled={disabled} key="{id}" on:keydown={inputTextKeyDown} bind:value={record[id]}>
           {:else if rowProps.type == 'input[date]'}
             <input type="date" disabled={disabled} key="{id}" on:input={inputTextKeyDown} on:keydown={inputTextKeyDown} bind:value={record[id]}>
           {:else if rowProps.type == 'input[check]'}

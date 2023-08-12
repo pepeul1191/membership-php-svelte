@@ -7,11 +7,12 @@
   let alertMessageProps = {};
   let membershipMemberTable;
 	let packageMembershipTable;
+	let packageExerciseTable;
 	let disabled = false;
 	let hidePackages = 'none';
   // search form
 	export let memberId;
-	export let showModal = false
+	export let displayModal = 'none'
 
   onMount(() => {
     // console.log('index');
@@ -22,6 +23,7 @@
       }
     });
 		// table
+		console.log(packageMembershipTable)
     membershipMemberTable.queryParams = {member_id: memberId}
     membershipMemberTable.list();
   });
@@ -34,17 +36,24 @@
   };
 
 	const loadExersices = (membershipPackage) => {
-		console.log(membershipPackage);
-		showModal = true;
+		var packageId = membershipPackage.id;
+		displayModal = 'block';
+		packageExerciseTable.urlServices.list = `${baseURL}admin/package/exercise?package_id=${packageId}`;
+		packageExerciseTable.extraData.package_id = packageId;
+		packageExerciseTable.list();
+  };
+
+	const deleteExercise = (exercise) => {
+		console.log(exercise)
   };
 
 	const closeModal = () => {
-		showModal = false;
+		displayModal = 'none';
   };
 
 	document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
-      showModal = false;
+      displayModal = 'none';
     }
   });
 </script>
@@ -52,25 +61,104 @@
 <svelte:head>
 	<title>Gestión de Membresias del Miembro</title>
 </svelte:head>
-{#if showModal}
-	<div class="modal fade show" on:click={closeModal} tabindex="-1" style="display: block;">
-		<div class="modal-dialog modal-xl">
+
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="modal fade show" tabindex="-1" style="display: {displayModal};">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Ejercicios del Paquete</h5>
+					<h3>Ejercicios del Paquete</h3>
 					<button type="button" class="btn-close" on:click={closeModal}></button>
 				</div>
 				<div class="modal-body">
-					<p>This is the modal content.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" on:click={closeModal}>Cerrar</button>
+					<svelte:component this={alertMessage} {...alertMessageProps} />
+					<DataTable bind:this={packageExerciseTable} 
+						urlServices={{ 
+							list: `${baseURL}admin/package/exercise`, 
+							save: `${baseURL}admin/package/exercise` 
+						}}
+						buttonSave={true},
+						colspanFooter=6,
+						rows={{
+							exercise_id: {
+								style: 'color: red; display:none;',
+								type: 'id',
+							},
+							body_part_name:{
+								type: 'td',
+							},
+							exercise:{
+								type: 'td',
+							},
+							position:{
+								type: 'input[text]',
+								style: 'text-align: center;'
+							},
+							reps:{
+								type: 'input[text]',
+								style: 'text-align: center;'
+							},
+							sets:{
+								type: 'input[text]',
+								style: 'text-align: center;'
+							},
+							actions:{
+								type: 'actions',
+								buttons: [
+									{
+										type: 'custom', 
+										icon: 'fa fa-times', 
+										style:'font-size:12px; margin-right:8px;',
+										key: 'id',
+										customFunction: deleteExercise,
+									},
+								],
+								style: 'text-align:center;'
+							}, 
+						}}
+						headers={[
+							{
+								caption: 'codigo',
+								style: 'display:none;',
+							},
+							{
+								caption: 'Parte del Cuerpo',
+								style: 'width: 175px;'
+							},
+							{
+								caption: 'Ejercicio',
+							},
+							{
+								caption: 'Posición',
+								style: 'width: 70px; text-align: center;'
+							},
+							{
+								caption: 'Repeticiones',
+								style: 'width: 70px; text-align: center;'
+							},
+							{
+								caption: 'Series',
+								style: 'width: 70px; text-align: center;'
+							},
+							{
+								caption: 'Operaciones',
+								style:'text-align: center; width: 100px;',
+							},
+						]}
+							messages={{
+								notChanges: 'No ha ejecutado cambios en la tabla de ejercicios de la membersía.',
+								list404: 'Rercuso no encontrado para listar los elmentos de la tabla de ejercicios de la membersía.',
+								list500: 'Ocurrió un error en listar los elementos de la tabla de ejercicios de la membersía.',
+								save404: 'Rercuso no encontrado para guardar los cambios de la tabla de ejercicios de la membersía.',
+								save500: 'Ocurrió un error para guardar los cambios de la tabla de ejercicios de la membersía.',
+								save200: 'Se han actualizado los registros de la tabla de ejercicios de la membersía.',
+						}}
+					/>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="modal-backdrop fade show"></div>
-{/if}
+	<div class="modal-backdrop fade show" style="display: {displayModal};"></div>
 
 <div class="container">
 	<div class="row">
@@ -217,5 +305,9 @@
 </div>
 
 <style>
-
+  @media (min-width: 992px){
+		.modal-lg, .modal-xl {
+			--bs-modal-width: 900px;
+		}
+	}
 </style>
