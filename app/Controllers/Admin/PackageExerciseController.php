@@ -88,31 +88,45 @@ class PackageExerciseController extends BaseController
   function save($f3)
   {
     // data
-    $resp = '';
+    $resp = [];
     $status = 200;
-    $payload = json_decode(file_get_contents('php://input'));
-    $data = $payload->{'data'};
-    $memberId = $payload->{'id'};
+    $payload = json_decode(file_get_contents('php://input'), true);
+		$edits = $payload['edits'];
+    $packageId = $payload['extra']['package_id'];
     // logic
     \ORM::get_db('app')->beginTransaction();
     try {
-      if(count($data) > 0){
-				foreach ($data as &$record) {
-          $objectiveId = $record->{'id'};
-          $exist = $record->{'exist'};
-          $e = \Model::factory('App\\Models\\MemberObjective', 'app')
-            ->where('member_id', $memberId)
-            ->where('objective_id', $objectiveId)
-            ->find_one();
-          if($exist == 0){
-            if($e != false){
-              $e->delete();
-            }
+      // edits
+      if(count($edits) > 0){
+				foreach ($edits as &$edit) {
+          // if position = 0 and reps = 0 and sets = 0 then errase exercise from package
+          if($edit['position'] == '0' && $edit['reps'] == '0' && $edit['sets'] == '0'){
+            \ORM::for_table('packages_exercises', 'app')
+              ->where('package_id', $packageId)
+              ->where('exercise_id', $edit['exercise_id'])
+              ->delete_many();
           }else{
-            if($e == false){
-              $n = \Model::factory('App\\Models\\MemberObjective', 'app')->create();
-              $n->member_id = $memberId;
-              $n->objective_id = $objectiveId;
+            // else, if not exist exercise in package then create
+            $result = \ORM::for_table('packages_exercises', 'app')
+              ->where('package_id', $packageId)
+              ->where('exercise_id', $edit['exercise_id'])
+              ->find_one();
+            if($result != null){
+              // if exist then edit
+              $result->package_id = $packageId;
+              $result->exercise_id = $edit['exercise_id'];
+              $result->position = $edit['position'];
+              $result->reps = $edit['reps'];
+              $result->sets = $edit['sets'];
+              $result->save();
+            }else{
+              // else create
+              $n = \Model::factory('App\\Models\\PackageExercise', 'app')->create();
+              $n->exercise_id = $edit['exercise_id'];
+              $n->position = $edit['position'];
+              $n->reps = $edit['reps'];
+              $n->sets = $edit['sets'];
+              $n->package_id = $packageId;
               $n->save();
             }
           }
@@ -120,9 +134,11 @@ class PackageExerciseController extends BaseController
       }
       // commit
       \ORM::get_db('app')->commit();
+      // response data
+      $resp = json_encode(array());
     }catch (\Exception $e) {
-      $status = 500;
-      $resp = json_encode(['ups', $e->getMessage()]);
+      $status = ($status == 200) ? 500 : $status;
+      $resp = json_encode($e->getMessage());
     }
     // resp
     http_response_code($status);
