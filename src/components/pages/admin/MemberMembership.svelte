@@ -44,7 +44,19 @@
   };
 
 	const deleteExercise = (exercise) => {
-		console.log(exercise)
+		packageExerciseTable.data.forEach((record) =>{
+			console.log(exercise)
+			if(record.exercise_id == exercise.exercise_id){
+				console.log(record.position)
+				console.log(record.reps)
+				console.log(record.sets)
+
+				record.position = 0;
+				record.reps = 0;
+				record.sets = 0;
+				record = record;
+			}
+		})
   };
 
 	const closeModal = () => {

@@ -2576,7 +2576,7 @@
 											"top": 732,
 											"width": 110.92529296875,
 											"height": 13,
-											"text": "+resp: INT",
+											"text": "+reps: INT",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8225,7 +8225,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGHVu4SuCYLLhk="
 							},
-							"name": "resp",
+							"name": "reps",
 							"type": "INT"
 						},
 						{
