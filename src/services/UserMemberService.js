@@ -40,3 +40,25 @@ export const updateMemberUser = (params ) => {
     });
   });
 }
+
+export const resetPasswordMemberUser = (params ) => {
+  return new Promise((resolve, reject) => {
+    axios.post('access/member/reset_password', JSON.stringify(params), {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(function (response) {
+      resolve(response);
+    }).catch(function (error) {
+      if(error.response.status == 404){
+        console.error('Usuario para resetear contraseña no existe en el servidor')
+      }else{
+        console.error(error.response.data);
+      }
+      reject(error.response);
+    })
+    .then(function () {
+      // todo?
+    });
+  });
+}

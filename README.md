@@ -73,3 +73,4 @@ CRYPTO_DOM="softweb.pe"
 ## TODO
 
 + Procedimiento almacenado en la base de datos para actualizar el estado de las membresías de ACTIVO a VENCIDO.
++ Helpers/mail_helper -> resetMail

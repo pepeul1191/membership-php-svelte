@@ -113,4 +113,47 @@ class UserMemberController extends BaseController
     http_response_code($status);
     echo $resp;
   }
+
+  function resetPasswordMember($f3)
+  {
+    SessionAdminApiFilter::before($f3);
+    // helper
+    parent::loadHelper('mail');
+    // data
+    # TODO: pensar cómo reutilizar este método cuando la petición venga del login-reset-password
+    $resp = '';
+    $status = 200;
+    $payload = json_decode(file_get_contents('php://input'));
+    $userId = $payload->{'user_id'};
+    // logic
+    try {
+      $userMember = \ORM::for_table('users_members', 'app')
+        ->table_alias('UM')
+        ->select('M.email')
+        ->select('M.names')
+        ->select('M.last_names')
+        ->select('M.id', 'memberId')
+        ->inner_join('members', array('M.id', '=', 'UM.member_id'), 'M')
+        ->inner_join('users', array('U.id', '=', 'UM.user_id'), 'U')
+        ->where_equal('UM.user_id', $userId)
+        ->find_one();
+      if($userMember != false){
+        $randomKey = \App\Libraries\RandomLib::stringNumber(15);
+        \ORM::get_db('app')->beginTransaction();
+        $e = \Model::factory('App\\Models\\User', 'app')->find_one($userId);
+        $e->reset_key = $randomKey;
+        $e->save();
+        resetMail($f3, $e, $randomKey);
+        \ORM::get_db('app')->commit();
+      }else{
+
+      }
+    }catch (\Exception $e) {
+      $status = 501;
+      $resp = json_encode($e->getMessage());
+    }
+    // resp
+    http_response_code($status);
+    echo $resp;
+  }
 }

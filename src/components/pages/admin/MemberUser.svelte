@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { getMemberUser, updateMemberUser } from '../../../services/UserMemberService.js';
+  import { getMemberUser, updateMemberUser, resetPasswordMemberUser } from '../../../services/UserMemberService.js';
   import { alertMessage as alertMessageStore} from '../../../stores/alertMessage.js';
   import AlertMessage from '../../widgets/AlertMessage.svelte';
   import InputText from '../../widgets/InputText.svelte';
@@ -108,7 +108,18 @@
   };
 
   const sendResetMail = () => {
-    alert('TODO: Enviar correo con reseteo de contraseña')
+    resetPasswordMemberUser({user_id: userId}).then((resp) => {
+      launchAlert(null, 'Se envió el correo una solicitud de cambio de contraseña.', 'success');
+    }).catch((resp) =>  {
+      console.log(resp)
+      if(resp.status == 404){
+        launchAlert(null, 'Recurso resetar contraseña por correo no existe', 'danger');
+      }else if(resp.status == 501){ 
+        launchAlert(null, resp.data, 'danger');
+      }else { 
+        launchAlert(null, 'Ocurrió un error en resetear la contraseña del usuario', 'danger');
+      }
+    })
   };
 </script>
 

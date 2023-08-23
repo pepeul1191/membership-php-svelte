@@ -62,6 +62,7 @@ $f3->route('POST /admin/package/exercise', '\App\Controllers\Admin\PackageExerci
 ### access - member - user
 $f3->route('GET  /access/member/@memberId/user', '\App\Controllers\Access\UserMemberController->findOne');
 $f3->route('POST  /access/member/update', '\App\Controllers\Access\UserMemberController->update');
+$f3->route('POST  /access/member/reset_password', '\App\Controllers\Access\UserMemberController->resetPasswordMember');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler
