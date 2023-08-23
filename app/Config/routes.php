@@ -59,8 +59,9 @@ $f3->route('POST /admin/membership/package', '\App\Controllers\Admin\MembershipP
 ### admin - package exercise
 $f3->route('GET  /admin/package/exercise', '\App\Controllers\Admin\PackageExerciseController->list');
 $f3->route('POST /admin/package/exercise', '\App\Controllers\Admin\PackageExerciseController->save');
-### admin - member - user
-$f3->route('GET  /admin/member/@memberId/user', '\App\Controllers\Admin\MemberController->userFindOne');
+### access - member - user
+$f3->route('GET  /access/member/@memberId/user', '\App\Controllers\Access\UserMemberController->findOne');
+$f3->route('POST  /access/member/update', '\App\Controllers\Access\UserMemberController->update');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

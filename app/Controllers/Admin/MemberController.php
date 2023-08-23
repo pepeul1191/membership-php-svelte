@@ -89,6 +89,7 @@ class MemberController extends BaseController
       // news
       if(count($news) > 0){
 				foreach ($news as &$new) {
+          // create member
 				  $n = \Model::factory('App\\Models\\Member', 'app')->create();
 					$n->names = $new['names'];
           $n->last_names = $new['last_names'];
@@ -105,6 +106,19 @@ class MemberController extends BaseController
             'tmp' => $new['id'],
             'id' => $n->id,
           ));
+          // create user
+          $u = \Model::factory('App\\Models\\User', 'app')->create();
+          $u->user = '';
+          $u->password = '';
+          $u->reset_key = \App\Libraries\RandomLib::stringNumber(20);
+          $u->activation_key = \App\Libraries\RandomLib::stringNumber(20);
+          $u->state = 'PENDING';
+          $u->save();
+          // create user member
+          $um = \Model::factory('App\\Models\\UserMember', 'app')->create();
+          $um->user_id = $u->id;
+          $um->member_id = $n->id;
+          $um->save();
 				}
       }
       // edits
@@ -135,36 +149,6 @@ class MemberController extends BaseController
     }catch (\Exception $e) {
       $status = 500;
       $resp = json_encode(['ups', $e->getMessage()]);
-    }
-    // resp
-    http_response_code($status);
-    echo $resp;
-  }
-
-  function userFindOne($f3, $params)
-  {
-    // data
-    $data = [];
-    $status = 200;
-    $memberId = $params['memberId'];
-    $userMember = \Model::factory('App\\Models\\UserMember', 'app')
-                ->where('member_id', $memberId)->find_one();
-    if($userMember == false){
-      $status = 404;
-      $resp = 'member-has-no-user';
-    }else{
-      $user = \Model::factory('App\\Models\\User', 'app')
-                ->where('id', $userMember->{'user_id'})->find_one();
-      if($user == false){
-        $status = 404;
-        $resp = 'no-user-created';
-      }else{
-        $resp = json_encode(array(
-          'user_id' => $user->{'id'},
-          'user' => $user->{'user'},
-          'state' => $user->{'state'},
-        ));
-      }
     }
     // resp
     http_response_code($status);
