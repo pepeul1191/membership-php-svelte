@@ -134,7 +134,7 @@
     })
   };
 
-  const observerSearch = (key, idSearched, observerArray) => {
+  export const observerSearch = (key, idSearched, observerArray) => {
     for (var i=0; i < observerArray.length; i++) {
       if (observerArray[i][key] == idSearched) {
         return observerArray[i];

@@ -44,19 +44,23 @@
   };
 
 	const deleteExercise = (exercise) => {
+		var tmp = [];
 		packageExerciseTable.data.forEach((record) =>{
-			console.log(exercise)
+			console.log(record)
 			if(record.exercise_id == exercise.exercise_id){
-				console.log(record.position)
-				console.log(record.reps)
-				console.log(record.sets)
-
 				record.position = 0;
 				record.reps = 0;
 				record.sets = 0;
-				record = record;
+				// update observer
+				let idKey = 'exercise_id'
+				let rowKey = record.exercise_id;
+				if(packageExerciseTable.observerSearch(idKey, rowKey, packageExerciseTable.observer.edit) == false){
+        	packageExerciseTable.observer.edit.push({exercise_id: exercise.exercise_id})
+      	}
 			}
+			tmp.push(record);
 		})
+		packageExerciseTable.data = tmp;
   };
 
 	const closeModal = () => {
