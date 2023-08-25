@@ -21,7 +21,7 @@
         alertMessageProps = value.props;
       }
     });
-		// postion select
+		// select
     inputBodyPart.list();
 		// table
     await exerciseDataTable.getSelect({
