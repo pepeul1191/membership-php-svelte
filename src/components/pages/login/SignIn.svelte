@@ -13,7 +13,7 @@
   let disabled = true;
   let termsChecked = false;
   // functions
-  $: queryParams = queryString.parse(location.search);
+  $: queryParams = queryString.parse(window.location.search);
   const termsAndContiditions = () => {
     const myModal = document.getElementById('termsAndConditionsModal');
     modal = new Modal(myModal);

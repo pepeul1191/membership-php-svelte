@@ -8,7 +8,6 @@
   let messageColor = '';
   let queryParams;
   // functions
-  console.log(location)
   $: queryParams = queryString.parse(window.location.search);
   onMount(() => {
 		// console.log('index');  

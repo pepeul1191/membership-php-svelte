@@ -8,7 +8,7 @@
   let messageColor = '';
   let queryParams;
   // functions
-  $: queryParams = queryString.parse(location.search);
+  $: queryParams = queryString.parse(window.location.search);
   onMount(() => {
 		// console.log('index');  
     // console.log(CSRF);
