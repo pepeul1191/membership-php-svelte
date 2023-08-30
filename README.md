@@ -70,6 +70,10 @@ CRYPTO_KEY="SuEMnUn8SsqThjyPYQD0tL"
 CRYPTO_DOM="softweb.pe"
 ```
 
+Backup de PhpMyAdmin
+
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; --> ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 ## TODO
 
 + Procedimiento almacenado en la base de datos para actualizar el estado de las membresías de ACTIVO a VENCIDO.
