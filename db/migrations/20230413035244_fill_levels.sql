@@ -5,5 +5,4 @@ INSERT INTO levels (name) VALUES ('SUPERIOR HOMBRE - INTERMEDIO');
 
 -- migrate:down
 
-TRUNCATE levels;
-
+TRUNCATE levels;)

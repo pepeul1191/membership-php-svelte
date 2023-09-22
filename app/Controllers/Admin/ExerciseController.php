@@ -37,11 +37,12 @@ class ExerciseController extends BaseController
         $stmt = $stmt->where_like('name', '%' . $name . '%');
       }
       if(
-        $f3->get('GET.body_part_id') != null
+        $f3->get('GET.body_part_id') != null && $f3->get('GET.body_part_id') != 'E'
       ){
         $bodyPartId = $f3->get('GET.body_part_id');
         $stmt = $stmt->where_raw('body_part_id = ' . $bodyPartId);
       }
+      $stmt->order_by_asc('body_part_id');
       // execute query
       $resp = json_encode($stmt->find_array());
     }catch (\Exception $e) {

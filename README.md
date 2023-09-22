@@ -25,7 +25,8 @@ Migraciones con DBMATE - accesos/sqlite3:
 ### Dump y Restore Mysql
 
     $ mysqldump -u root -p --ignore-table=vw_project_types_projects antergo > db/antergo.sql
-    $ mysql -u root -p antergo < db/antergo.sql
+    $ mysqldump -u root -p drgym > db/drgym.sql
+    $ mysql -u root -p drgym < db/drgym.sql
 
 ## Habilitar GROUP BY MySQL
 
