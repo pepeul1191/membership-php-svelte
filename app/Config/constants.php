@@ -9,8 +9,8 @@ if($_ENV['FF_ENVIRONMENT'] == 'production'){
   );
 }else if($_ENV['FF_ENVIRONMENT'] == 'development'){
   return array(
-    'baseURL' => 'http://localhost:8000/',
-    'staticURL' => 'http://localhost:8000/public/',
+    'baseURL' => 'http://192.168.1.27:8000/',
+    'staticURL' => 'http://192.168.1.27:8000/public/',
     'csrfKey' => '_demo',
     'csrfValue' => '_123',
   );

@@ -2,6 +2,7 @@
   import { navigate } from 'svelte-routing';
   import queryString from 'query-string';
   import { onMount } from 'svelte';
+  const static_url = STATIC_URL;
   export let location;
   // variables
   let message = '';
@@ -46,7 +47,7 @@
 
 <main class="form-signin w-100 m-auto text-center">
   <form action="/login" method="post">
-    <img class="mb-4" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <img class="mb-4" src="{static_url}assets/imgs/logo-cuadrado.png" alt="" width="144" height="138">
     <h1 class="h3 mb-3 fw-normal">Bienvenido</h1>
 
     <div class="form-floating">
